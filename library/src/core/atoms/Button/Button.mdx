@@ -1,0 +1,19 @@
+---
+name: Button
+route: /
+menu: Core
+---
+
+import { Playground, PropsTable } from 'docz';
+import Button from './Button';
+
+
+# Component Library
+
+<PropsTable of={Button} />
+
+<Playground>
+  <Button disabled={false} handleClick={() => {alert('1')}}>
+      I'm a button component
+  </Button>
+</Playground>
