@@ -3,4 +3,5 @@ export default {
     showPlaygroundEditor: true,
   },
   typescript: true,
+  dest: '/docz-dist',
 };
