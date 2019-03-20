@@ -4,8 +4,6 @@ import {
   node, string, bool, func,
 } from 'prop-types';
 
-import './Button.css';
-
 function Button({
   classname,
   children,
