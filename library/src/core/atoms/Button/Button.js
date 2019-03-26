@@ -7,21 +7,24 @@ import './Button.css';
 
 function Button({
   classname,
+  appearance,
+  size,
   children,
   disabled,
   handleClick,
   ...props
 }) {
   const clickHandler = (e) => {
-    handleClick(e);
+    handleClick();
   };
 
   return (
-    <div className={clsx(classname, 'button-component')}>
+    <div className={clsx(classname, appearance, size, 'button-component')}>
       <button
         type="button"
         disabled={disabled}
         onClick={clickHandler}
+        className={classname}
         data-testid="button"
         {...props}
       >
