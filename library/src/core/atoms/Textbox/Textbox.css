@@ -1,0 +1,25 @@
+.textbox-component {
+  position: relative;
+  display: inline-block;
+}
+
+.textbox-component > input {
+min-height: 28px;
+  font-size: 14px;
+  padding: 5px 20px 5px 10px;
+}
+
+.textbox-component > input::-ms-clear,
+.textbox-component > input::-ms-reveal {
+  display: none;
+}
+
+.textbox-component .clear {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  color: #282c34;
+  padding: 5px;
+  cursor: pointer;
+}
