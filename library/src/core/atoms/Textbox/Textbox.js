@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import clsx from 'clsx';
 import {
   node,
   string,
   bool,
   func,
+  oneOf
 } from 'prop-types';
 import './Textbox.css'
 
@@ -23,7 +24,7 @@ function Textbox({
 }) {
   const [textValue, setTextValue] = useState(value);
 
-  let textInput = React.createRef();
+  let textInput = useRef(null);
 
   const updateTextValue = (e) => {
     setTextValue(e.target.value)
@@ -75,7 +76,7 @@ Textbox.propTypes = {
   readOnly: bool,
   classname: string,
   value: string,
-  type: string,
+  type: oneOf(['text', 'email', 'password']),
   ariaLabel: string,
   isRequired: bool,
   canClear: bool,
