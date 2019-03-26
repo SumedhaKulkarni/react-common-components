@@ -6,6 +6,7 @@
 .pnp.js
 /.docz
 /.docz/**
+/src/.docz/
 
 # testing
 /coverage

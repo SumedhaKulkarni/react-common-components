@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from 'react';
 import { render, fireEvent, wait } from 'react-testing-library';
 import Textbox from './Textbox';

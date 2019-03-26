@@ -2,7 +2,7 @@ export default {
   themeConfig: {
     showPlaygroundEditor: true,
   },
-  typescript: true,
+  typescript: false,
   dest: '/docz-dist',
   modifyBundlerConfig: (bundlerConfig) => {
     const rules = [

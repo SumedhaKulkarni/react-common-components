@@ -1,9 +1,9 @@
-import React from 'react'
-import clsx from 'clsx'
+import React from 'react';
+import clsx from 'clsx';
 import {
-  node, string, oneOf
+  node, string, oneOf,
 } from 'prop-types';
-import './Label.css'
+import './Label.css';
 
 function Label({
   classname,
@@ -12,7 +12,6 @@ function Label({
   size,
   ...props
 }) {
-  
   return (
     <div className={clsx(classname, 'label-component', size)}>
       <label
@@ -27,16 +26,16 @@ function Label({
 }
 
 Label.propTypes = {
-  children: node,
-  htmlFor: string,
+  children: node.isRequired,
+  htmlFor: string.is,
   classname: string,
-  size: oneOf(['medium', 'large', 'extra-large', 'small', 'extra-small'])
+  size: oneOf(['medium', 'large', 'extra-large', 'small', 'extra-small']),
 };
 
 Label.defaultProps = {
   classname: '',
   htmlFor: '',
-  size:'medium'
+  size: 'medium',
 };
 
 export default Label;

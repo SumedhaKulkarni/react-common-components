@@ -5,9 +5,9 @@ import {
   string,
   bool,
   func,
-  oneOf
+  oneOf,
 } from 'prop-types';
-import './Textbox.css'
+import './Textbox.css';
 
 function Textbox({
   classname,
@@ -24,19 +24,19 @@ function Textbox({
 }) {
   const [textValue, setTextValue] = useState(value);
 
-  let textInput = useRef(null);
+  const textInput = useRef(null);
 
   const updateTextValue = (e) => {
-    setTextValue(e.target.value)
-    handleChange(e)
-  }
+    setTextValue(e.target.value);
+    handleChange(e);
+  };
   const clearField = () => {
-    setTextValue('')
-    textInput.current.focus()
-  }
+    setTextValue('');
+    textInput.current.focus();
+  };
 
   return (
-    <div className={clsx(classname, 'textbox-component', {'disabled': readOnly})}>
+    <div className={clsx(classname, 'textbox-component', { disabled: readOnly })}>
       <input
         type={type}
         value={textValue}
@@ -48,23 +48,27 @@ function Textbox({
         placeholder={placeHolder}
         data-testid="textbox"
         ref={textInput}
-        className={clsx({'disabled': readOnly})}
+        className={clsx({ disabled: readOnly })}
         {...props}
       />
-      { canClear &&
-        !readOnly &&
-        textValue.length > 0 &&
-        <span
-          className="clear"
-          role="button"
-          tabIndex="0"
-          aria-pressed="false"
-          aria-label="clear-textbox"
-          onClick={clearField}
-          onKeyPress={(e) => {if(e.key === 'Enter') {clearField(e)}}}
-          data-testid="clear-textbox">
+      { canClear
+        && !readOnly
+        && textValue.length > 0
+        && (
+          <span
+            className="clear"
+            role="button"
+            tabIndex="0"
+            aria-pressed="false"
+            aria-label="clear-textbox"
+            onClick={clearField}
+            onKeyPress={(e) => { if (e.key === 'Enter') { clearField(e); } }}
+            data-testid="clear-textbox"
+          >
           &times;
-        </span>}
+          </span>
+        )
+        }
       {children}
     </div>
   );
@@ -80,7 +84,7 @@ Textbox.propTypes = {
   ariaLabel: string,
   isRequired: bool,
   canClear: bool,
-  placeHolder: string
+  placeHolder: string,
 };
 
 Textbox.defaultProps = {
@@ -93,7 +97,7 @@ Textbox.defaultProps = {
   ariaLabel: 'textbox',
   isRequired: false,
   canClear: true,
-  placeHolder: ''
+  placeHolder: '',
 };
 
 export default Textbox;

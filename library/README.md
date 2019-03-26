@@ -9,7 +9,7 @@
 
 
 > Commands
-  - run the app : *yarn start-js*
+  - run the app : *yarn start*
   - run test cases:  *yarn test*
   - check documentation: *yarn docz*
   - commit your changes: *yarn commit*
