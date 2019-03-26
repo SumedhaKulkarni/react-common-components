@@ -27,7 +27,7 @@ function Label({
 
 Label.propTypes = {
   children: node.isRequired,
-  htmlFor: string.is,
+  htmlFor: string,
   classname: string,
   size: oneOf(['medium', 'large', 'extra-large', 'small', 'extra-small']),
 };
