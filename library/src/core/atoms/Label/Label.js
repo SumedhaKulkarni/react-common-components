@@ -30,7 +30,7 @@ Label.propTypes = {
   children: node,
   htmlFor: string,
   classname: string,
-  size: oneOf['medium', 'large', 'extra-large', 'small', 'extra-small']
+  size: oneOf(['medium', 'large', 'extra-large', 'small', 'extra-small'])
 };
 
 Label.defaultProps = {
