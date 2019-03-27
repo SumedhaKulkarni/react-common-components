@@ -24,7 +24,6 @@ function Button({
         type="button"
         disabled={disabled}
         onClick={clickHandler}
-        className={classname}
         data-testid="button"
         {...props}
       >
@@ -39,11 +38,15 @@ Button.propTypes = {
   disabled: bool,
   handleClick: func.isRequired,
   classname: string,
+  appearance: string,
+  size: string,
 };
 
 Button.defaultProps = {
   disabled: false,
   classname: '',
+  appearance: '',
+  size: '',
 };
 
 export default Button;
