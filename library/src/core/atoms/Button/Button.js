@@ -15,7 +15,7 @@ function Button({
   ...props
 }) {
   const clickHandler = (e) => {
-    handleClick();
+    handleClick(e);
   };
 
   return (
