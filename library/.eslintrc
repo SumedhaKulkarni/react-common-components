@@ -1,7 +1,7 @@
 {
   "parser": "babel-eslint",
   "extends": "airbnb",
-  "plugins": ["react", "jsx-a11y", "import"],
+  "plugins": ["react", "jsx-a11y", "import", "react-hooks"],
   "env": {
       "browser": true,
       "jest": true
@@ -12,6 +12,8 @@
         "required": {
             "every": [ "id" ]
         }
-    }]
+    }],
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn"
   }
 }

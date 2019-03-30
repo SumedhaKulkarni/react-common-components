@@ -1,0 +1,122 @@
+---
+name: Accordion
+route: /
+menu: Atoms
+---
+
+import { Playground, PropsTable } from 'docz';
+import Accordion from './Accordion';
+
+
+# Accordion
+ > make sure you pass index to the compound properties of Accordion i.e Title and Content
+
+## Properties
+
+<PropsTable of={Accordion} />
+
+## Basic Usage
+
+<Accordion>
+  <Accordion.Title index={1}>
+    This is title 1
+  </Accordion.Title>
+  <Accordion.Content index={1}>
+    This is content of the accordion 1
+  </Accordion.Content>
+
+  <Accordion.Title index={2}>
+    This is title 2
+  </Accordion.Title>
+  <Accordion.Content index={2}>
+    This is content of the accordion 2
+  </Accordion.Content>
+</Accordion>
+
+
+## Expand Multiple Panes
+
+<Accordion openMutilpePanes>
+  <Accordion.Title index={1}>
+    This is title 1
+  </Accordion.Title>
+  <Accordion.Content index={1}>
+    This is content of the accordion 1
+  </Accordion.Content>
+
+  <Accordion.Title index={2}>
+    This is title 2
+  </Accordion.Title>
+  <Accordion.Content index={2}>
+    This is content of the accordion 2
+  </Accordion.Content>
+</Accordion>
+
+
+## Pre Expanded Panes
+
+
+<Accordion preSelectedPanes={[2]}>
+  <Accordion.Title index={1}>
+    This is title 1
+  </Accordion.Title>
+  <Accordion.Content index={1}>
+    This is content of the accordion 1
+  </Accordion.Content>
+
+  <Accordion.Title index={2}>
+    This is title 2
+  </Accordion.Title>
+  <Accordion.Content index={2}>
+    This is content of the accordion 2
+  </Accordion.Content>
+</Accordion>
+
+
+## Nested Accordion
+
+
+<Accordion>
+  <Accordion.Title index={1}>
+    Nested Accordion Title
+  </Accordion.Title>
+  <Accordion.Content index={1}>
+    <Accordion>
+      <Accordion.Title index={21}>
+        This is title 1
+      </Accordion.Title>
+      <Accordion.Content index={21}>
+        This is content of the accordion 1
+      </Accordion.Content>
+
+      <Accordion.Title index={22}>
+        This is title 2
+      </Accordion.Title>
+      <Accordion.Content index={22}>
+        This is content of the accordion 2
+      </Accordion.Content>
+    </Accordion>
+  </Accordion.Content>
+</Accordion>
+
+
+## Playground
+
+
+<Playground>
+  <Accordion>
+    <Accordion.Title index={1}>
+      This is title 1
+    </Accordion.Title>
+    <Accordion.Content index={1}>
+      This is content of the accordion 1
+    </Accordion.Content>
+
+    <Accordion.Title index={2}>
+      This is title 2
+    </Accordion.Title>
+    <Accordion.Content index={2}>
+      This is content of the accordion 2
+    </Accordion.Content>
+  </Accordion>
+</Playground>
