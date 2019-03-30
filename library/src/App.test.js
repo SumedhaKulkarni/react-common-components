@@ -4,5 +4,5 @@ import App from './App';
 
 it('renders without crashing', () => {
   const { getByText } = render(<App />);
-  expect(getByText('Learn React')).toBeInTheDOM();
+  expect(getByText('Welcome to React')).toBeInTheDOM();
 });

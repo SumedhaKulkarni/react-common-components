@@ -1,7 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import {
-  node, string, bool, func,
+  node, string, bool, func, oneOf,
 } from 'prop-types';
 import './Button.css';
 
@@ -39,14 +39,14 @@ Button.propTypes = {
   handleClick: func.isRequired,
   classname: string,
   appearance: string,
-  size: string,
+  size: oneOf(['medium', 'large', 'extra-large', 'small', 'extra-small']),
 };
 
 Button.defaultProps = {
   disabled: false,
   classname: '',
   appearance: '',
-  size: '',
+  size: 'medium',
 };
 
 export default Button;
