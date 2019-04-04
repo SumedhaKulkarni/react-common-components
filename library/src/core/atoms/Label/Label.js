@@ -1,7 +1,7 @@
 import React from 'react';
 import clsx from 'clsx';
 import {
-  node, string, oneOf,
+  node, string, oneOf
 } from 'prop-types';
 import './Label.css';
 
@@ -29,13 +29,13 @@ Label.propTypes = {
   children: node.isRequired,
   htmlFor: string,
   classname: string,
-  size: oneOf(['medium', 'large', 'extra-large', 'small', 'extra-small']),
+  size: oneOf(['medium', 'large', 'extra-large', 'small', 'extra-small'])
 };
 
 Label.defaultProps = {
   classname: '',
   htmlFor: '',
-  size: 'medium',
+  size: 'medium'
 };
 
 export default Label;
