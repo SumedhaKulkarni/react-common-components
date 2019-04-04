@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import clsx from 'clsx';
 import {
-  string, number, oneOf, oneOfType
+  string, number, oneOf, oneOfType,
 } from 'prop-types';
 import './Badge.css';
 
@@ -36,13 +36,13 @@ Badge.propTypes = {
   count: oneOfType([string, number]).isRequired,
   classname: string,
   effect: oneOf(['bounce', 'scale', '']),
-  shape: oneOf(['circle', 'oval'])
+  shape: oneOf(['circle', 'oval']),
 };
 
 Badge.defaultProps = {
   classname: '',
   effect: '',
-  shape: 'oval'
+  shape: 'oval',
 };
 
 export default Badge;
