@@ -22,14 +22,14 @@ it('should accept size and appearance attributes', () => {
 });
 
 it('should switch to internal link', () => {
-  const handleClick = jest.fn();
+  const clickEvent = jest.fn();
   const { getByTestId } = render(
-    <LinkComp isInternal handleClick={handleClick}>
+    <LinkComp isInternal clickEvent={clickEvent}>
     Primary
     </LinkComp>,
   );
   fireEvent.click(getByTestId('button'));
-  expect(handleClick).toHaveBeenCalledTimes(1);
+  expect(clickEvent).toHaveBeenCalledTimes(1);
 });
 
 it('should switch to external link', () => {

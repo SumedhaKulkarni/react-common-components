@@ -18,9 +18,11 @@ function LinkComp({
 }) {
   if (isInternal) {
     return (
-      <div className={clsx(classname, appearance, size, 'link-component')}>
+      <div className={clsx(classname, 'link-component')}>
         <Button
           handleClick={clickEvent}
+          appearance={appearance}
+          size={size}
           {...props}
         >
           {children}
@@ -55,7 +57,7 @@ LinkComp.defaultProps = {
   classname: '',
   clickEvent: () => {},
   appearance: '',
-  size: '',
+  size: 'medium',
   address: '',
 };
 

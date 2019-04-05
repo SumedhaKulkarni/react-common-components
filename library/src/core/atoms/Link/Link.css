@@ -1,38 +1,33 @@
 .link-component a,
-.link-component button {
+.link-component .button-component button {
     text-decoration: none;
     background: none;
     border: none;
-    padding: none;
+    padding: 0;
     color: #551a8b;
 }
 
 .link-component a:hover,
-.link-component button:hover {
+.link-component .button-component button:hover {
     text-decoration: underline;
 }
 
-.link-component.extra-small a, 
-.link-component.extra-small button {
+.link-component.extra-small a{
   font-size: 10px;
 }
 
-.link-component.small a, 
-.link-component.small button {
+.link-component.small a {
   font-size: 14px;
 }
 
-.link-component.medium a, 
-.link-component.medium button {
+.link-component.medium a {
   font-size: 16px;
 }
 
-.link-component.large a, 
-.link-component.large button {
+.link-component.large a {
   font-size: 20px;
 }
 
-.link-component.extra-large a, 
-.link-component.extra-large button {
+.link-component.extra-large a {
   font-size: 24px;
 }
