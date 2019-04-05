@@ -14,16 +14,29 @@ const props = {
   count: '99+',
 };
 
-it('should render the accordion component with props', () => {
+it('should render the badge component with props', () => {
   render(<BasicBadge {...props} />);
 });
 
-it('should add class bounce for bounce effect', () => {
+it('should add bounce class for bounce effect', () => {
   const { getByText } = render(<BasicBadge {...props} />);
   expect(getByText('99+')).toHaveClass('bounce');
+});
+
+it('should remove bounce class after bounce effect', () => {
+  const { getByText } = render(<BasicBadge {...props} />);
+  setTimeout(() => {
+    expect(getByText('99+').toHaveClass('bounce')).toBe(false);
+  }, 600);
 });
 
 it('should add class circle for circular shape', () => {
   const { getByText } = render(<BasicBadge {...props} />);
   expect(getByText('99+')).toHaveClass('circle');
+});
+
+it('should update the count value', () => {
+  const { getByText, rerender } = render(<BasicBadge {...props} />);
+  rerender(<BasicBadge count={100} />);
+  expect(getByText('100').textContent).toBe('100');
 });
