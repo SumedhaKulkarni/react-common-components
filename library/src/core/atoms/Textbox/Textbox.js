@@ -15,6 +15,7 @@ function Textbox({
   readOnly,
   value,
   handleChange,
+  handleClearValue,
   type,
   ariaLabel,
   isRequired,
@@ -32,6 +33,7 @@ function Textbox({
   };
   const clearField = () => {
     setTextValue('');
+    handleClearValue();
     textInput.current.focus();
   };
 
@@ -77,6 +79,7 @@ function Textbox({
 Textbox.propTypes = {
   children: node,
   handleChange: func,
+  handleClearValue: func,
   readOnly: bool,
   classname: string,
   value: string,
@@ -90,6 +93,7 @@ Textbox.propTypes = {
 Textbox.defaultProps = {
   children: null,
   handleChange: () => {},
+  handleClearValue: () => {},
   readOnly: false,
   classname: '',
   value: '',
