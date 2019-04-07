@@ -1,0 +1,33 @@
+---
+name: RadioOption
+route: /radio-option
+menu: Atoms
+---
+
+import { Playground, PropsTable } from 'docz';
+import RadioOption from './RadioOption';
+import { useState } from 'react';
+
+# Component Library
+
+<Playground>
+  {() => {
+    const [selectedValue, updateSelection] = useState('oranges');
+    const handleChange = (e) => {
+      console.log('***', e.target.value);
+      updateSelection(e.target.value);
+    }
+    return (
+      <div>
+        <RadioOption size='medium' label="apples" value="Apples" name="fruits" checked={ selectedValue==="apples" }  onChange={handleChange} disabled>
+            Apples
+        </RadioOption>
+        <RadioOption size='medium' label="oranges" value="Oranges" checked={ selectedValue==="oranges" } name="fruits" onChange={handleChange}>
+            Oranges
+        </RadioOption>
+      </div>
+    )
+  }}
+</Playground>
+
+<PropsTable of={RadioOption} />
