@@ -1,0 +1,7 @@
+.radio-group-component--horizontal .label-component {
+  display: inline-block;
+}
+
+.radio-group-component--horizontal .label-component:not(:last-child) {
+  margin-right: 15px;
+}

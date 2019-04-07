@@ -1,0 +1,36 @@
+---
+name: RadioGroup
+route: /radio-group
+menu: Molecules
+---
+
+import { Playground, PropsTable } from 'docz';
+import RadioGroup from './RadioGroup';
+import RadioOption from '../../atoms/RadioOption/RadioOption';
+import { useState } from 'react';
+
+# Component Library
+
+<Playground>
+  {() => {
+    const [selectedValue, updateSelection] = useState('oranges');
+    const handleChange = (e) => {
+      // updateSelection(e.target.value);
+    }
+    return (
+      <RadioGroup name="fruit" selectedValue={selectedValue} onChange={handleChange} horizontal>
+        <RadioOption label="apples" value="apples" >
+            Apples
+        </RadioOption>
+        <RadioOption label="oranges" value="oranges">
+            Oranges
+        </RadioOption>
+        <RadioOption label="grapes" value="Grapes" disabled>
+          Grapes
+        </RadioOption>
+      </RadioGroup>
+    )
+  }}
+</Playground>
+
+<PropsTable of={RadioGroup} />
