@@ -1,12 +1,14 @@
 import React from 'react';
 import clsx from 'clsx';
 import {
-  node, string, bool, func,
+  node, string, bool, func, oneOf,
 } from 'prop-types';
 import './Button.css';
 
 function Button({
   classname,
+  appearance,
+  size,
   children,
   disabled,
   handleClick,
@@ -17,7 +19,7 @@ function Button({
   };
 
   return (
-    <div className={clsx(classname, 'button-component')}>
+    <div className={clsx(classname, appearance, size, 'button-component')}>
       <button
         type="button"
         disabled={disabled}
@@ -36,11 +38,15 @@ Button.propTypes = {
   disabled: bool,
   handleClick: func.isRequired,
   classname: string,
+  appearance: string,
+  size: oneOf(['medium', 'large', 'extra-large', 'small', 'extra-small']),
 };
 
 Button.defaultProps = {
   disabled: false,
   classname: '',
+  appearance: '',
+  size: 'medium',
 };
 
 export default Button;

@@ -1,6 +1,6 @@
 ---
 name: Button
-route: /
+route: /button
 menu: Atoms
 ---
 
@@ -8,12 +8,13 @@ import { Playground, PropsTable } from 'docz';
 import Button from './Button';
 
 
-# Component Library
+# Button
 
-<PropsTable of={Button} />
 
 <Playground>
   <Button disabled={false} handleClick={() => {alert('1')}}>
       I'm a button component
   </Button>
 </Playground>
+
+<PropsTable of={Button} />
