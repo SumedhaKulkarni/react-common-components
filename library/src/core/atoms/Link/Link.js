@@ -10,10 +10,9 @@ function LinkComp({
   classname,
   isInternal,
   clickEvent,
-  appearance,
-  size,
   address,
   children,
+  target,
   ...props
 }) {
   if (isInternal) {
@@ -21,8 +20,6 @@ function LinkComp({
       <div className={clsx(classname, 'link-component')}>
         <Button
           handleClick={clickEvent}
-          appearance={appearance}
-          size={size}
           {...props}
         >
           {children}
@@ -31,10 +28,11 @@ function LinkComp({
     );
   }
   return (
-    <div className={clsx(classname, appearance, size, 'link-component')}>
+    <div className={clsx(classname, 'link-component')}>
       <a
         href={address}
         data-testid="link"
+        target={target}
         {...props}
       >
         {children}
@@ -48,17 +46,15 @@ LinkComp.propTypes = {
   isInternal: bool.isRequired,
   clickEvent: func,
   classname: string,
-  appearance: string,
-  size: string,
   address: string,
+  target: string,
 };
 
 LinkComp.defaultProps = {
   classname: '',
   clickEvent: () => {},
-  appearance: '',
-  size: 'medium',
   address: '',
+  target: '',
 };
 
 export default LinkComp;

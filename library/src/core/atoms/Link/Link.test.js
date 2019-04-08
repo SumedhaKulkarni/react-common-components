@@ -11,14 +11,13 @@ it('should render the passed props as content body', () => {
   expect(getByTestId('link').textContent).toBe('Primary');
 });
 
-it('should accept size and appearance attributes', () => {
-  const { container } = render(
-    <LinkComp isInternal={false} size="medium" appearance="primary">
+it('should accept target attribute', () => {
+  const { getByTestId } = render(
+    <LinkComp isInternal={false} target="_blank">
     Primary
     </LinkComp>,
   );
-  expect(container.firstChild).toHaveClass('primary');
-  expect(container.firstChild).toHaveClass('medium');
+  expect(getByTestId('link')).toHaveAttribute('target');
 });
 
 it('should switch to internal link', () => {
