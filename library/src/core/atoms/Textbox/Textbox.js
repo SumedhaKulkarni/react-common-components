@@ -57,7 +57,7 @@ function Textbox({
         && !readOnly
         && textValue.length > 0
         && (
-          <span
+          <div
             className="clear"
             role="button"
             tabIndex="0"
@@ -67,8 +67,8 @@ function Textbox({
             onKeyPress={(e) => { if (e.key === 'Enter') { clearField(e); } }}
             data-testid="clear-textbox"
           >
-          &times;
-          </span>
+            <span className="clear__icon">&times;</span>
+          </div>
         )
         }
       {children}
