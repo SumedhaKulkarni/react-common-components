@@ -17,7 +17,7 @@ it('should invoke the click handler', () => {
 
 it('should disable the button', () => {
   const handleClick = jest.fn();
-  const { getByTestId } = render(<Button handleClick={handleClick} disabled={true}>Primary</Button>);
+  const { getByTestId } = render(<Button handleClick={handleClick} disabled>Primary</Button>);
   expect(getByTestId('button')).toHaveAttribute('disabled');
 });
 

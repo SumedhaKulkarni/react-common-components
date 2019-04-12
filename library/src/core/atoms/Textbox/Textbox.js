@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import clsx from 'clsx';
 import {
   node,
@@ -24,6 +24,12 @@ function Textbox({
   ...props
 }) {
   const [textValue, setTextValue] = useState(value);
+  useEffect(() => {
+    if (textValue !== value) {
+      console.log('text', value);
+      setTextValue(value);
+    }
+  }, [value]);
 
   const textInput = useRef(null);
 
