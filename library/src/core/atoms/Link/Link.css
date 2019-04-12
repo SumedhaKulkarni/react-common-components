@@ -1,0 +1,33 @@
+.link-component a,
+.link-component .button-component button {
+    text-decoration: none;
+    background: none;
+    border: none;
+    padding: 0;
+    color: #551a8b;
+}
+
+.link-component a:hover,
+.link-component .button-component button:hover {
+    text-decoration: underline;
+}
+
+.link-component.extra-small a{
+  font-size: 10px;
+}
+
+.link-component.small a {
+  font-size: 14px;
+}
+
+.link-component.medium a {
+  font-size: 16px;
+}
+
+.link-component.large a {
+  font-size: 20px;
+}
+
+.link-component.extra-large a {
+  font-size: 24px;
+}
