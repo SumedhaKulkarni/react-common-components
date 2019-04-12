@@ -28,7 +28,9 @@ function Switch({
         <input
           type="checkbox"
           checked={isChecked}
+          aria-checked={isChecked}
           disabled={disabled}
+          aria-readonly={disabled}
           onChange={clickHandler}
           id="input-switch"
           data-testid="input-switch"
