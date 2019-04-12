@@ -1,10 +1,26 @@
 .accordion-wrapper {
   text-align: left;
+  outline: none;
 }
 .accordion-title {
   border: 1px solid #000;
   margin-bottom: 5px;
   font-size: 20px;
+  border: 1px solid #000;
+  margin-bottom: 5px;
+  font-size: 20px;
+  border-radius: 3px 3px 0 0;
+  background-color: #ececec;
+  display: flex;
+  align-items: center;
+  height: 30px;
+  outline: none;
+}
+.accordion-title > div {
+  width: 100%;
+  padding: 5px;
+  cursor: pointer;
+  outline: none;
 }
 .accordion-title.expanded {
   margin-bottom: 0;
@@ -14,6 +30,7 @@
   border-top: none;
   margin-bottom: 5px;
   font-size: 16px;
+  padding: 10px;
 }
 .hide {
   display: none

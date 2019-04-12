@@ -1,0 +1,175 @@
+---
+name: Autosuggest
+route: /auto-suggest
+menu: Molecules
+---
+
+import { useState } from 'react';
+import { Playground, PropsTable } from 'docz';
+import { Autosuggest, useListSelection, useVisibility } from './Autosuggest';
+import useFilterList from '../../common-hooks/useFilterList';
+
+# Autosuggest
+
+<PropsTable of={Autosuggest} />
+
+## Static List
+<Playground>
+  {() => {
+    const listItems = [
+      {
+        id: 1,
+        title: 'list item 1',
+      },
+      {
+        id: 2,
+        title: 'list item 2',
+      },
+      {
+        id: 3,
+        title: 'list item 3',
+      },
+      {
+        id: 4,
+        title: 'list item 4',
+      },
+    ];
+    const { selectedItem, setSelectedListItem } = useListSelection();
+    const { listCollection, filterList } = useFilterList(listItems);
+    const { showListWrapper, setListWrapper } = useVisibility(false);
+    
+    function onTextChange(searchText) {
+    const textLength = searchText.length;
+      if (textLength > 0) {
+        filterList(searchText);
+        setListWrapper(true);
+      } else {
+        setListWrapper(false);
+      }
+    }
+
+    function setListItem(title) {
+      setSelectedListItem(title);
+      setListWrapper(false);
+    }
+    return (
+      <Autosuggest
+          selectedValue={selectedItem}
+          textChange={onTextChange}
+          showListContainer={showListWrapper}
+        >
+          <ul>
+            {listCollection.map(item => (
+              <li>
+                <a
+                  tabIndex={0}
+                  key={item.id}
+                  onClick={() => setListItem(item.title)}
+                >
+                  {item.title}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </Autosuggest>
+    )
+
+}}
+
+</Playground>
+
+## Dynamic List
+
+<Playground>
+  {() => {
+    const listItems = [
+      {
+        id: 1,
+        title: 'list item 1',
+      },
+      {
+        id: 2,
+        title: 'list item 2',
+      },
+      {
+        id: 3,
+        title: 'list item 3',
+      },
+      {
+        id: 4,
+        title: 'list item 4',
+      },
+    ];
+    const { selectedItem, setSelectedListItem } = useListSelection();
+    const { showListWrapper, setListWrapper } = useVisibility(false);
+    const [ showLoader, setLoader ] = useState(false);
+    const [listCollection, setListCollection] = useState([]);
+
+    
+    function onTextChange(searchText) {
+    setListWrapper(true);
+    const textLength = searchText.length;
+      if (textLength > 2) {
+        setLoader(true);
+        setTimeout(() => {
+          setLoader(false);
+          setListCollection(listItems);
+        }, 2000);
+        
+      } else {
+        setListWrapper(false);
+      }
+    }
+
+    function setListItem(title) {
+      setSelectedListItem(title);
+      setListWrapper(false);
+    }
+
+    function handleKeyDownEvent(title, e) {
+      if (e.key === 'Enter') {
+        setListItem(title);
+      }
+    }
+    return (
+      <Autosuggest
+          selectedValue={selectedItem}
+          textChange={onTextChange}
+          showListContainer={showListWrapper}
+        >
+          <div>
+            { (showLoader && showListWrapper) && <div>Loading ....</div> }
+            { (showListWrapper && !showLoader) && (
+            <ul>
+              {listCollection.map(item => (
+                <li key={item.id}>
+                  <span
+                    tabIndex={0}
+                    key={item.id}
+                    role="button"
+                    onKeyDown={e => handleKeyDownEvent(item.title, e)}
+                    onClick={() => setListItem(item.title)}
+                  >
+                    {item.title}
+                  </span>
+                </li>
+              ))
+            }
+            </ul>
+            )
+            }
+          </div>
+        </Autosuggest>
+    )
+
+}}
+
+</Playground>
+
+## Additional points to remember
+  - UI of list is customizable, and hence is not integral part of Autosuggest
+  - make sure to import the custom hooks to filter the list, set selected list item, hide the list container
+  - refer to the sample code to make the list accessible via keyboard
+  - same control can be used to make a service call and populate the list, refer to dyamic list example
+
+

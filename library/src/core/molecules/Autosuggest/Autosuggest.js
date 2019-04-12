@@ -13,22 +13,23 @@ export function useListSelection(value = '') {
   const setSelectedListItem = (val) => {
     setSelectedItem(val);
   };
-  return [selectedItem, setSelectedListItem];
+  return { selectedItem, setSelectedListItem };
 }
 
-export function useVisibility() {
-  const [visibility, setVisibility] = useState(false);
-  const toggleVisibility = (flag) => {
-    setVisibility(flag);
+export function useVisibility(initialValue = false) {
+  const [showListWrapper, setListVisibility] = useState(initialValue);
+  const setListWrapper = (flag) => {
+    setListVisibility(flag);
   };
-  return [visibility, toggleVisibility];
+  return { showListWrapper, setListWrapper };
 }
 
 export function Autosuggest({
-  placeholder, charlimit, children, selectedValue, textChange, showListContainer,
+  placeholder, children, selectedValue, textChange, showListContainer, isDisabled,
 }) {
   const listRef = useRef(null);
   const [listVisibility, setListVisibility] = useState(showListContainer);
+  // handles the visibility of the list container
   useEffect(() => {
     setListVisibility(showListContainer);
   }, [showListContainer]);
@@ -37,6 +38,7 @@ export function Autosuggest({
     setListVisibility(false);
   }
 
+  // hide the list container when clicked else where on the page
   useEffect(() => {
     const handler = handleClickOutside(listRef, hideList);
     document.addEventListener('click', handler);
@@ -47,36 +49,38 @@ export function Autosuggest({
 
 
   function onTextChange(e) {
-    if (charlimit < 1) {
-      textChange(e.target.value);
-    }
+    textChange(e.target.value);
   }
 
   function onClearValue() {
     textChange('');
   }
   return (
-    <div className="autosuggest-wrapper" ref={listRef}>
+    <div
+      className="autosuggest-wrapper"
+      ref={listRef}
+      aria-haspopup="listbox"
+      aria-expanded={listVisibility}
+      data-testid="autosuggest-component"
+    >
       <div className="text-container">
         <Textbox
           handleChange={onTextChange}
           handleClearValue={onClearValue}
           placeholder={placeholder}
           value={selectedValue}
+          data-testid="autosuggest-searchbox"
+          aria-autocomplete="list"
+          aria-controls="autosuggest-list-container"
+          disabled={isDisabled}
+          classname="autosuggest-textbox"
         />
       </div>
-      <div className="list-container" ref={listRef}>
-        {false && (
-        <div className="loader">
-          Loading ...
-        </div>
-        )}
+      <div className="autosuggest-list-container" ref={listRef} aria-labelledby="autosuggest-list-container">
         {listVisibility && (
-          <div className="list-container">
-            <div className="list-items">
-              {children}
-            </div>
-          </div>
+        <div className="list-items">
+          {children}
+        </div>
         )}
       </div>
     </div>
@@ -85,18 +89,17 @@ export function Autosuggest({
 
 Autosuggest.propTypes = {
   placeholder: string,
-  charlimit: Number,
   children: node.isRequired,
   selectedValue: string,
-  textChange: func,
+  textChange: func.isRequired,
   showListContainer: bool,
+  isDisabled: bool,
 };
 
 
 Autosuggest.defaultProps = {
   placeholder: 'Search here',
-  charlimit: 0,
   selectedValue: '',
-  textChange: () => {},
   showListContainer: false,
+  isDisabled: false,
 };

@@ -1,21 +1,22 @@
 import React from 'react';
-import { render, fireEvent, act } from 'react-testing-library';
+import { render, fireEvent } from 'react-testing-library';
 import Accordion from './Accordion';
 
-const CommonAccordion = (props) => {
-  return (
-    <Accordion {...props}>
-      <Accordion.Title index={1}>One</Accordion.Title>
-      <Accordion.Content index={1}>First Panel</Accordion.Content>
-      <Accordion.Title index={2}>Two</Accordion.Title>
-      <Accordion.Content index={2}>Second Panel</Accordion.Content>
-    </Accordion>
-  );
-}
+const CommonAccordion = props => (
+  <Accordion {...props}>
+    <Accordion.Title index={1}>One</Accordion.Title>
+    <Accordion.Content index={1}>First Panel</Accordion.Content>
+    <Accordion.Title index={2}>Two</Accordion.Title>
+    <Accordion.Content index={2}>Second Panel</Accordion.Content>
+  </Accordion>
+);
+
+
 const props = {
   openMutilpePanes: false,
-  preSelectedPanes: [1]
-}
+  preSelectedPanes: [1],
+};
+
 it('should render the accordion component with props', () => {
   render(<CommonAccordion {...props} />);
 });
@@ -32,13 +33,13 @@ it('toggle the accordion panel ', () => {
 });
 
 it('expand panel on load', () => {
-  const { getByText } = render(<CommonAccordion preSelectedPanes={[1]}/>);
+  const { getByText } = render(<CommonAccordion preSelectedPanes={[1]} />);
   const title = getByText('One');
-  expect(title.parentElement).toHaveAttribute('aria-expanded', "true");
+  expect(title.parentElement).toHaveAttribute('aria-expanded', 'true');
 });
 
 it('should allow multiple panels to be expanded simulatneously', () => {
-  const { container, getByText } =  render(<CommonAccordion openMutilpePanes />);
+  const { container, getByText } = render(<CommonAccordion openMutilpePanes />);
   const first = getByText('One');
   fireEvent.click(first);
   const second = getByText('Two');
