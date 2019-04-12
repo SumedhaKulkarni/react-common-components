@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
 import {
-  node, string, bool, func,
+  string, bool, func,
 } from 'prop-types';
 import './Switch.css';
 
@@ -34,7 +34,7 @@ function Switch({
           data-testid="input-switch"
           {...props}
         />
-        <div className="slider round">
+        <div className="slider">
           <span className="on" data-testid="input-on">{onText}</span>
           <span className="off" data-testid="input-off">{offText}</span>
         </div>
