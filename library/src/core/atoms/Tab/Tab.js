@@ -19,15 +19,9 @@ export default function Tabs({
   ...props
 }) {
   const [activeIndex, updateActiveIndex] = useState(selected);
-  const [activeTabStyle, updateActiveTabStyle] = useState({ offset: 0, width: 0 });
-  function updateBarStyle() {
-    const tabStyle = activeTabStyle;
-    updateActiveTabStyle(tabStyle);
-  }
   function toggleTab(index, disabled = false) {
     if (!disabled) {
       updateActiveIndex(index);
-      updateBarStyle();
       onChange(index);
       return true;
     }
