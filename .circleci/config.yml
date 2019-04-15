@@ -6,6 +6,6 @@ jobs:
       - image: circleci/openjdk:8-jdk-node-browsers
     steps:
       - checkout
-      - run: npm install
-      - run: npm lint
-      - run: npm test
+      - run: yarn install
+      - run: yarn lint
+      - run: yarn test
