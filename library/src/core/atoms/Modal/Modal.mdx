@@ -1,0 +1,36 @@
+---
+name: Modal
+route: /Modal
+menu: Atoms
+---
+import { useState } from 'react';
+import { Playground, PropsTable } from 'docz';
+import Modal from './Modal';
+
+# Modal
+
+<Playground>
+    {() => {
+        const [isOpen, setIsOpen] = useState(false);
+        const toggleModal = () => {
+            setIsOpen(!isOpen);
+        };
+        return (
+            <div>
+                <button type="button" onClick={toggleModal}>Open the modal</button>
+                <Modal show={isOpen}>
+                    <Modal.Header onClose={toggleModal}>Header</Modal.Header>
+                    <Modal.Body><h1>Hello!!</h1></Modal.Body>
+                    <Modal.Footer>
+                        Footer
+                       
+                    </Modal.Footer>
+                </Modal>
+            </div>
+        )
+    }}
+    
+      
+</Playground>
+
+<PropsTable of={Modal} />
