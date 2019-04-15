@@ -24,7 +24,7 @@ it('should render the Modal component with props', () => {
 it('should open Modal', () => {
   const { getByTestId, rerender } = render(<BasicModal {...props} />);
   rerender(<BasicModal show />);
-  expect(getByTestId('modal-content')).toHaveClass('fadein');
+  expect(getByTestId('modal-content')).toHaveClass('fadeinout');
   expect(getByTestId('modal')).toHaveStyle('display: block');
 });
 
