@@ -22,22 +22,21 @@ export default function Tabs({
   const [activeTabStyle, updateActiveTabStyle] = useState({ offset: 0, width: 0 });
   function updateBarStyle() {
     const tabStyle = activeTabStyle;
-    children.every((child) => {
-      if (child.props.index !== activeIndex) {
-        console.log({ child });
-        return true;
-      }
-      return false;
-    });
     updateActiveTabStyle(tabStyle);
   }
-  function toggleTab(index) {
-    updateActiveIndex(index);
-    updateBarStyle();
-    onChange(index);
+  function toggleTab(index, disabled = false) {
+    if (!disabled) {
+      updateActiveIndex(index);
+      updateBarStyle();
+      onChange(index);
+      return true;
+    }
+    return false;
   }
-  // console.log(React.Children[0]);
-  const tabsTitle = React.Children.map(children, (child) => {
+
+  let tabsTitle = [];
+  let tabsContent = [];
+  React.Children.map(children, (child) => {
     const {
       index,
       title,
@@ -45,7 +44,7 @@ export default function Tabs({
       ...tabProps
     } = child.props;
     const isActive = index === activeIndex;
-    return (
+    tabsTitle = [...tabsTitle, (
       <div
         role="heading"
         className={clsx(`tabs-component__title__item tabs-component__title__item--${index} tabs-component__title__item--${style}`, { 'tabs-component__title__item--active': isActive, 'tabs-component__title__item--disabled': disabled })}
@@ -54,31 +53,32 @@ export default function Tabs({
         aria-label={title}
         aria-level={1}
         aria-disabled={disabled}
+        key={title}
         {...tabProps}
         {...props}
       >
         <Label
           data-testid="tab-title-item-label"
-          onClick={() => { if (!disabled) { toggleTab(index); } }}
-          onKeyPress={() => (!disabled ? toggleTab(index) : null)}
+          onClick={() => toggleTab(index, disabled)}
+          onKeyPress={() => toggleTab(index, disabled)}
           role="button"
           tabIndex={!disabled ? 0 : -1}
         >
           {title}
         </Label>
       </div>
-    );
+    )];
+    tabsContent = [...tabsContent, (
+      index === activeIndex
+        ? React.cloneElement(
+          child, {
+            selected: activeIndex,
+            key: `content-${index}`,
+          },
+        )
+        : null
+    )];
   });
-
-  const tabsContent = React.Children.map(children, child => (
-    child.props.index === activeIndex
-      ? React.cloneElement(
-        child, {
-          selected: activeIndex,
-        },
-      )
-      : null
-  ));
 
   return (
     <div className={clsx('tabs-component', classname, `tabs-component--${style}`)} data-testid="tab">
@@ -138,5 +138,5 @@ Tabs.Pane.propTypes = {
 Tabs.Pane.defaultProps = {
   index: undefined,
   disabled: false,
-  selected: undefined
+  selected: undefined,
 };
