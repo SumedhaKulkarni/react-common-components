@@ -1,83 +1,86 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import clsx from 'clsx';
 import {
-  string, func, bool, node,
+  string, func, bool, node, oneOf,
 } from 'prop-types';
 import './Modal.css';
+import handleClickOutside from '../../common-hooks/useHandleClickOutside';
 
 
 function Modal({
   classname,
-  show,
+  showModal,
   children,
+  onClose,
+  size,
+  ...props
 }) {
+  const [isVisible, setVisibility] = useState(showModal);
   const modalRef = useRef(null);
   useEffect(() => {
-    const modalContentRef = modalRef.current.querySelector('.modal-content');
-    if (show) {
-      modalContentRef.classList.add('fadein');
-      modalRef.current.style.display = 'flex';
-    } else {
-      modalContentRef.classList.remove('fadein');
-      modalRef.current.style.display = 'none';
-    }
-  }, [show]);
+    setVisibility(showModal);
+  }, [showModal]);
 
-  const modal = React.Children.map(children, child => (
-    child
-  ));
+  function closeModal() {
+    setVisibility(false);
+    onClose();
+  }
+
+  function handlekeyPress(e) {
+    if (e.key === 'Enter') {
+      setVisibility(false);
+      onClose();
+    }
+  }
+
+  useEffect(() => {
+    const handler = handleClickOutside(modalRef, closeModal);
+    if (isVisible) {
+      document.addEventListener('click', handler);
+    }
+    return (() => {
+      document.removeEventListener('click', handler);
+    });
+  });
+
+  function handleEsc(e) {
+    if (e.key === 'Escape') {
+      closeModal();
+    }
+  }
+
+  useEffect(() => {
+    if (isVisible) {
+      document.addEventListener('keydown', handleEsc, false);
+    }
+    return (() => {
+      document.removeEventListener('keydown', handleEsc, false);
+    });
+  });
+
   return (
-    <div data-testid="modal" ref={modalRef} className={clsx(classname, 'modal')}>
-      <div data-testid="modal-content" className="modal-content">{modal}</div>
+    <div className={clsx(classname, 'modal', { show: isVisible })} {...props} data-testid="modal-container">
+      <div className={clsx('modal-content', size)} ref={modalRef}>
+        <span role="button" onKeyPress={handlekeyPress} tabIndex={0} className="close-icon" onClick={closeModal}> X </span>
+        {children}
+      </div>
     </div>
   );
 }
 
-Modal.Header = ({
-  children,
-  onClose,
-}) => (
-  <header className={clsx('modal-header')}>
-    {children}
-    <span className="close-icon" onClick={onClose} onKeyPress={onClose} role="button" tabIndex="0" />
-  </header>
-);
-
-Modal.Body = ({
-  children,
-}) => (
-  <div className={clsx('modal-body')}>
-    {children}
-  </div>
-);
-
-Modal.Footer = ({
-  children,
-}) => (
-  <footer className={clsx('modal-footer')}>
-    {children}
-  </footer>
-);
-
 Modal.propTypes = {
-  show: bool,
-  classname: string,
   children: node.isRequired,
+  classname: string,
+  showModal: bool,
+  onClose: func,
+  size: oneOf(['large', 'medium', 'small']),
 };
 
 Modal.defaultProps = {
   classname: '',
-  show: false,
-};
-Modal.Header.propTypes = {
-  children: node.isRequired,
-  onClose: func.isRequired,
-};
-Modal.Body.propTypes = {
-  children: node.isRequired,
-};
-Modal.Footer.propTypes = {
-  children: node.isRequired,
+  showModal: false,
+  onClose: () => {},
+  size: 'medium',
 };
 
 export default Modal;

@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import {
   string, node, func, bool,
 } from 'prop-types';
+import clsx from 'clsx';
 import Textbox from '../../atoms/Textbox/Textbox';
 import './Autosuggest.css';
 import handleClickOutside from '../../common-hooks/useHandleClickOutside';
@@ -25,7 +26,7 @@ export function useVisibility(initialValue = false) {
 }
 
 export function Autosuggest({
-  placeholder, children, selectedValue, textChange, showListContainer, isDisabled,
+  placeholder, children, selectedValue, textChange, showListContainer, isDisabled, classname,
 }) {
   const listRef = useRef(null);
   const [listVisibility, setListVisibility] = useState(showListContainer);
@@ -57,7 +58,7 @@ export function Autosuggest({
   }
   return (
     <div
-      className="autosuggest-wrapper"
+      className={clsx(classname, 'autosuggest-wrapper')}
       ref={listRef}
       aria-haspopup="listbox"
       aria-expanded={listVisibility}
@@ -94,6 +95,7 @@ Autosuggest.propTypes = {
   textChange: func.isRequired,
   showListContainer: bool,
   isDisabled: bool,
+  classname: string,
 };
 
 
@@ -102,4 +104,5 @@ Autosuggest.defaultProps = {
   selectedValue: '',
   showListContainer: false,
   isDisabled: false,
+  classname: '',
 };

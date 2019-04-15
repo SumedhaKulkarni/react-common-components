@@ -1,67 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 // import logo from './logo.svg';
 import './App.css';
-import { Autosuggest, useListSelection, useVisibility } from './core/molecules/Autosuggest/Autosuggest';
-import useFilterList from './core/common-hooks/useFilterList';
-
-const listItems = [
-  {
-    id: 1,
-    title: 'list item 1',
-  },
-  {
-    id: 2,
-    title: 'list item 2',
-  },
-  {
-    id: 3,
-    title: 'list item 3',
-  },
-  {
-    id: 4,
-    title: 'list item 4',
-  },
-];
+import Modal from './core/atoms/Modal/Modal';
 
 const App = () => {
-  const [selectedItem, setSelectedListItem] = useListSelection();
-  const [listCollection, setListCollection] = useFilterList(listItems);
-  const [showListWrapper, setListWrapper] = useVisibility();
-
-  function onTextChange(searchText) {
-    const textLength = searchText.length;
-    if (textLength > 0) {
-      setListCollection(searchText);
-      setListWrapper(true);
-    } else {
-      setListWrapper(false);
-    }
+  const [isOpen, setIsOpen] = useState(false);
+  const showModal = () => {
+    setIsOpen(true);
+  };
+  function onCloseModal() {
+    setIsOpen(false);
   }
-
-  function setListItem(title) {
-    setSelectedListItem(title);
-    setListWrapper(false);
-  }
-
   return (
     <div className="App">
       <header className="App-header">
         <h2>Welcome to React</h2>
       </header>
       <main>
-        <Autosuggest
-          selectedValue={selectedItem}
-          textChange={onTextChange}
-          showListContainer={showListWrapper}
-        >
-          <ul>
-            {listCollection.map(item => (
-              <li key={item.id} onClick={() => setListItem(item.title)}> {/*eslint-disable-line*/}
-                {item.title}
-              </li>
-            ))}
-          </ul>
-        </Autosuggest>
+        <div>
+          <button type="button" tabIndex={-1} onClick={showModal}>Open the modal</button>
+          <Modal showModal={isOpen} onClose={onCloseModal}>
+            <div className="modal-header">
+              <h2>Modal Header</h2>
+            </div>
+            <div className="modal-body">
+              Modal Content
+            </div>
+            <div className="modal-footer">
+              Modal Footer
+            </div>
+          </Modal>
+        </div>
       </main>
     </div>
   );

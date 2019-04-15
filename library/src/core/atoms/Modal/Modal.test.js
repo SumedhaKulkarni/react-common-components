@@ -1,39 +1,49 @@
 import React from 'react';
-import { render } from 'react-testing-library';
+import { render, cleanup, fireEvent } from 'react-testing-library';
 import Modal from './Modal';
 
-const onClose = jest.fn();
+const onCloseModal = jest.fn();
 
-const BasicModal = (props) => {
+const BasicModal = ({isOpen, onCloseModal}) => {
   return (
-    <Modal {...props}>
-      <Modal.Header onClose={onClose}>Header</Modal.Header>
-      <Modal.Body>Modal Body</Modal.Body>
-      <Modal.Footer>Footer</Modal.Footer>
-    </Modal>
+    <Modal showModal={isOpen} onClose={onCloseModal}>
+        <div className="modal-header">
+          <h2>Modal Header</h2>
+        </div>
+        <div className="modal-body">
+          Modal Content
+        </div>
+        <div className="modal-footer">
+          Modal Footer
+        </div>
+     </Modal>
   );
 };
-const props = {
-  show: false,
-};
+
+afterEach(cleanup);
+
 it('should render the Modal component with props', () => {
-  render(<BasicModal {...props} />);
+  render(<BasicModal />);
 });
 
 
-it('should open Modal', () => {
-  const { getByTestId, rerender } = render(<BasicModal {...props} />);
-  rerender(<BasicModal show />);
-  expect(getByTestId('modal-content')).toHaveClass('fadeinout');
-  expect(getByTestId('modal')).toHaveStyle('display: block');
+it('should toggle visibility of modal based on props', () => {
+  const { getByTestId, rerender } = render(<BasicModal isOpen={false} />);
+  expect(getByTestId('modal-container')).not.toHaveClass('show');
+  rerender(<BasicModal isOpen={true} />)
+  expect(getByTestId('modal-container')).toHaveClass('show modal');
 });
 
-it('should close Modal', () => {
-  const { getByTestId, rerender } = render(<BasicModal {...props} />);
-  rerender(<BasicModal show={false} />);
-  expect(getByTestId('modal-content')).toHaveClass('fadeout');
-  setTimeout(() => {
-    expect(getByTestId('modal-content')).toHaveClass('fadeout').toBe(false);
-    expect(getByTestId('modal')).toHaveStyle('display: none');
-  }, 300);
+it('should close the modal on click on cross icon', () => {
+  const { getByTestId } = render(<BasicModal isOpen={false} />);
+  const icon = getByTestId('modal-container').querySelector('.close-icon');
+  fireEvent.click(icon);
+  expect(getByTestId('modal-container')).not.toHaveClass('show');
+});
+
+it('should close the modal on click on modal background layer', () => {
+  const { getByTestId } = render(<BasicModal isOpen />);
+  expect(getByTestId('modal-container')).toHaveClass('show modal');
+  fireEvent.click(getByTestId('modal-container'));
+  expect(getByTestId('modal-container')).not.toHaveClass('show');
 });

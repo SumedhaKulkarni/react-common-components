@@ -12,19 +12,25 @@ import Modal from './Modal';
 <Playground>
     {() => {
         const [isOpen, setIsOpen] = useState(false);
-        const toggleModal = () => {
-            setIsOpen(!isOpen);
+        const openModal = () => {
+            setIsOpen(true);
         };
+        function onCloseModal() {
+            setIsOpen(false);
+        }
         return (
             <div>
-                <button type="button" onClick={toggleModal}>Open the modal</button>
-                <Modal show={isOpen}>
-                    <Modal.Header onClose={toggleModal}>Header</Modal.Header>
-                    <Modal.Body><h1>Hello!!</h1></Modal.Body>
-                    <Modal.Footer>
-                        Footer
-                       
-                    </Modal.Footer>
+                <button type="button" onClick={openModal}>Open the modal</button>
+                <Modal showModal={isOpen} onClose={onCloseModal} size='small'>
+                    <div className="modal-header">
+                    Modal Header
+                    </div>
+                    <div className="modal-body">
+                    Modal Content
+                    </div>
+                    <div className="modal-footer">
+                    Modal Footer
+                    </div>
                 </Modal>
             </div>
         )
