@@ -1,0 +1,18 @@
+---
+name: Switch
+route: /switch
+menu: Atoms
+---
+
+import { Playground, PropsTable } from 'docz';
+import Switch from './Switch';
+
+
+# Switch
+
+
+<Playground>
+  <Switch checked={false} handleToggle={() => {console.log('Switch Toggle')}} />
+</Playground>
+
+<PropsTable of={Switch} />

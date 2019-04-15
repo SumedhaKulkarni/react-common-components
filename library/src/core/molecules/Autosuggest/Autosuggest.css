@@ -1,0 +1,29 @@
+.autosuggest-wrapper {
+  text-align: left;
+}
+.autosuggest-wrapper .autosuggest-textbox, .autosuggest-textbox input{
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #555555;
+  outline: none;
+}
+.autosuggest-list-container .list-items {
+  border: 1px solid #555555;
+  border-top: none;
+}
+.autosuggest-list-container ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.autosuggest-list-container .list-items ul li a, .autosuggest-list-container .list-items ul li span{
+  padding: 10px;
+  cursor: pointer;
+  display: block;
+  text-decoration: none;
+}
+.autosuggest-list-container .list-items ul li a:hover, .autosuggest-list-container .list-items ul li span:hover {
+  background-color: #ececec;
+}
+

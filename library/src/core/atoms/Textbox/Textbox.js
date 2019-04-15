@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import clsx from 'clsx';
 import {
   node,
@@ -24,6 +24,12 @@ function Textbox({
   ...props
 }) {
   const [textValue, setTextValue] = useState(value);
+  useEffect(() => {
+    if (textValue !== value) {
+      console.log('text', value);
+      setTextValue(value);
+    }
+  }, [value]);
 
   const textInput = useRef(null);
 
@@ -57,7 +63,7 @@ function Textbox({
         && !readOnly
         && textValue.length > 0
         && (
-          <span
+          <div
             className="clear"
             role="button"
             tabIndex="0"
@@ -67,8 +73,8 @@ function Textbox({
             onKeyPress={(e) => { if (e.key === 'Enter') { clearField(e); } }}
             data-testid="clear-textbox"
           >
-          &times;
-          </span>
+            <span className="clear__icon">&times;</span>
+          </div>
         )
         }
       {children}
