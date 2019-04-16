@@ -61,7 +61,9 @@ function Modal({
   return (
     <div className={clsx(classname, 'modal', { show: isVisible })} {...props} data-testid="modal-container">
       <div className={clsx('modal-content', size)} ref={modalRef}>
-        <span role="button" onKeyPress={handlekeyPress} tabIndex={0} className="close-icon" onClick={closeModal}> X </span>
+        <span role="button" onKeyPress={handlekeyPress} tabIndex={0} className="close-icon" onClick={closeModal}>
+          &times;
+        </span>
         {children}
       </div>
     </div>
