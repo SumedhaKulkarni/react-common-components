@@ -14,6 +14,7 @@ function Switch({
   disabled,
   onText,
   offText,
+  htmlFor,
   ...props
 }) {
   const [isChecked, toggleCheck] = useState(checked);
@@ -24,7 +25,7 @@ function Switch({
 
   return (
     <div className={clsx(classname, 'switch-component')}>
-      <Label className="switch" htmlFor="input-switch">
+      <Label className="switch" htmlFor={htmlFor}>
         <input
           type="checkbox"
           checked={isChecked}
@@ -32,7 +33,7 @@ function Switch({
           disabled={disabled}
           aria-readonly={disabled}
           onChange={clickHandler}
-          id="input-switch"
+          id={htmlFor}
           data-testid="input-switch"
           {...props}
         />
@@ -52,6 +53,7 @@ Switch.propTypes = {
   disabled: bool,
   onText: string,
   offText: string,
+  htmlFor: string.isRequired,
 };
 
 Switch.defaultProps = {
