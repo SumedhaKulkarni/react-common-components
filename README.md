@@ -2,9 +2,9 @@
 
 
 
-This project was generated using [create-react-app](https://github.com/facebook/create-react-app) version 2.1.8 with features:
-- since it has React 16.8 version, all components are written using react hooks
-- all componenets have unit test cases in place
+This project was generated using [create-react-app](https://github.com/facebook/create-react-app) version 2.1.8 with below features:
+- all components are written using react hooks
+- all components have unit test cases in place
 - all components follow `W3C Accessibility` guidelines
 
 ## Development Server 
@@ -13,7 +13,7 @@ Run `yarn start` for a dev server. Navigate to `http://localhost:3000/`.  The ap
 
 ## Test cases
 
-Run `yarn test` to execute the unit test cases using
+Run `yarn test` to execute the unit test cases using [react testing library](https://github.com/kentcdodds/react-testing-library)
 
 ## Commit
 
@@ -21,7 +21,7 @@ Run `yarn commit` to commit your changes. This command internally uses [commitiz
 
 ## Documentaion
 
-Run `yarn docz` to check the entire component library. Create .mdx file for resepective components. 
+Run `yarn docz` to check the component library via [docz](https://www.docz.site/)
 
 ## Build
 
