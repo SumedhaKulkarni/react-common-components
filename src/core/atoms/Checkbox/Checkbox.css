@@ -73,3 +73,7 @@
   -ms-transform: rotate(45deg);
   transform: rotate(45deg);
 }
+
+.checkbox-text-disabled {
+  color: #beb8b8;
+}
