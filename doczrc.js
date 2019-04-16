@@ -8,7 +8,7 @@ export default {
     const rules = [
       {
         test: /\.css$/,
-        loader: 'style-loader!css-loader'
+        loader: 'style-loader!css-loader',
       },
     ];
     bundlerConfig.module.rules.push(...rules);
