@@ -12,7 +12,8 @@
     "docz": "docz dev",
     "docz:dev": "docz dev",
     "docz:build": "docz build",
-    "lint": "eslint ./src --ext .js"
+    "lint": "eslint ./src --ext .js",
+    "heroku-postbuild": "docz build"
   },
   "repository": {
     "type": "git",
