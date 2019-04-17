@@ -1,0 +1,19 @@
+.radio-option,
+.radio-option label,
+.radio-option__input {
+  cursor: pointer;
+}
+
+.radio-option__input {
+  margin-right: 5px;
+}
+
+.radio-option--disabled,
+.radio-option--disabled label,
+.radio-option__input--disabled {
+  cursor: not-allowed;
+}
+
+.radio-option--disabled label {
+  color: #bbbbbb;
+}

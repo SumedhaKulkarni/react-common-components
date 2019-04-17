@@ -1,0 +1,20 @@
+---
+name: Textbox
+route: /textbox
+menu: Atoms
+---
+
+import { Playground, PropsTable } from 'docz';
+import Textbox from './Textbox';
+
+
+# TextBox
+
+<Playground>
+  {() => {
+    let textValue = "hello"
+    return <Textbox value={textValue} handleChange={(e) => console.log(e.target.value)}></Textbox>
+  }}
+</Playground>
+
+<PropsTable of={Textbox} />

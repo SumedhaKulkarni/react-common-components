@@ -1,0 +1,51 @@
+.tabs-component {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+.tabs-component > .tabs-component__title {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #d1dbe5;
+}
+.tabs-component > .tabs-component__title > .tabs-component__title__item {
+  display: inline-block;
+  height: 40px;
+  padding: 0 16px;
+  box-sizing: border-box;
+  line-height: 40px;
+  transition: all .3s ease-in-out;
+}
+.tabs-component > .tabs-component__title > .tabs-component__title__item,
+.tabs-component > .tabs-component__title > .tabs-component__title__item > .label-component,
+.tabs-component > .tabs-component__title > .tabs-component__title__item > .label-component > label {
+  cursor: pointer;
+}
+
+.tabs-component > .tabs-component__title > .tabs-component__title__item--disabled,
+.tabs-component > .tabs-component__title > .tabs-component__title__item--disabled > .label-component,
+.tabs-component > .tabs-component__title > .tabs-component__title__item--disabled > .label-component > label {
+  cursor: not-allowed;
+  color: #bbbbbb;
+}
+
+.tabs-component > .tabs-component__title > .tabs-component__title__item.tabs-component__title__item--card {
+  border: 1px solid #fff;
+  border-bottom: 1px solid #d1dbe5;
+  position: relative;
+  bottom: -1px;
+}
+
+.tabs-component > .tabs-component__title > .tabs-component__title__item--card.tabs-component__title__item--active {
+  /* card type */
+  border: 1px solid #d1dbe5;
+  border-bottom-color: #fff;
+  border-radius: 4px 4px 0 0;
+}
+
+.tabs-component > .tabs-component__content {
+  text-align: left;
+}

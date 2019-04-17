@@ -1,0 +1,33 @@
+---
+name: Tabs
+route: /tabs
+menu: Atoms
+---
+
+import { Playground, PropsTable } from 'docz';
+import Tabs from './Tab';
+import { useState } from 'react';
+
+# Tabs
+
+<Playground>
+  {() => {
+    const [selectedValue, updateSelection] = useState(2);
+    const handleChange = (index) => {
+      console.log('***', index);
+      updateSelection(index);
+    }
+    return (
+      <div>
+        <Tabs selected={selectedValue} onChange={handleChange}>
+          <Tabs.Pane title="User" index={1}>User</Tabs.Pane>
+          <Tabs.Pane title="Config" index={2}>Config</Tabs.Pane>
+          <Tabs.Pane title="Role" index={3} disabled>Role</Tabs.Pane>
+          <Tabs.Pane title="Task" index={4}>Task</Tabs.Pane>
+        </Tabs>
+      </div>
+    )
+  }}
+</Playground>
+
+<PropsTable of={Tabs} />

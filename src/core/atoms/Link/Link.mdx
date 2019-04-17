@@ -1,0 +1,22 @@
+---
+name: Link
+route: /link
+menu: Atoms
+---
+
+import { Playground, PropsTable } from 'docz';
+import LinkComp from './Link';
+
+
+# Link
+
+<Playground>    
+    <LinkComp
+        isInternal={false}
+        address="#top"
+    >
+        I'm a link component
+    </LinkComp>
+</Playground>
+
+<PropsTable of={LinkComp} />
