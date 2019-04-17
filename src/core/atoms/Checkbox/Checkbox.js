@@ -19,7 +19,7 @@ function Checkbox({
   handleChange = () => { },
   ...props
 }) {
-  const [checked, setChecked] = useState(isChecked || false);
+  const [checked, setChecked] = useState(isChecked);
 
   const handleCheckboxChange = (e) => {
     setChecked(e.target.checked);
