@@ -26,7 +26,6 @@ function Textbox({
   const [textValue, setTextValue] = useState(value);
   useEffect(() => {
     if (textValue !== value) {
-      console.log('text', value);
       setTextValue(value);
     }
   }, [value]);
