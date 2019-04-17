@@ -34,7 +34,9 @@ function Checkbox({
           type="checkbox"
           value={value}
           checked={checked}
+          aria-checked={checked}
           disabled={disabled}
+          tabIndex="0"
           onChange={handleCheckboxChange}
           data-testid="checkbox"
           {...props}
