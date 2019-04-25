@@ -28,7 +28,7 @@ function Textbox({
     if (textValue !== value) {
       setTextValue(value);
     }
-  }, [value]);
+  }, [value, textValue]);
 
   const textInput = useRef(null);
 
