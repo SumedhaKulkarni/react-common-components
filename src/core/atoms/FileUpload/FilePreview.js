@@ -5,6 +5,9 @@ import {
 } from 'prop-types';
 import './FileUpload.css';
 
+const STATE_UPLOADING = 'uploading';
+const STATE_UPLOADED = 'uploaded';
+
 const styles = {
     inputWrapper: 'input-wrapper',
     inputCover: 'input-cover',
@@ -37,20 +40,32 @@ function FilePreview({
         styles.previewItem,
         data.loading ? styles.disabled : ''
     ].join(' ').trim();
-
+    const { state } = data;
     return (
         <div className={classes}>
             <div className={styles.fileNameStretch}>{data.name}</div>
-            <button className={styles.button}
+            {state === STATE_UPLOADING && <Loader />}
+            {state !== STATE_UPLOADING && <button className={styles.button}
+                disabled={state === STATE_UPLOADING || state === STATE_UPLOADED}
                 onClick={onRemove}>
                 remove
-        </button>
-            <button className={styles.button}
+            </button>}
+            {state !== STATE_UPLOADING && <button className={styles.button}
+                disabled={state === STATE_UPLOADING || state === STATE_UPLOADED}
                 onClick={onUpload}>
                 upload
-        </button>
+            </button>}
         </div>
     );
+}
+
+const Loader = () => {
+    return <div class="lds-spinner">
+        <div></div><div></div><div></div><div>
+        </div><div></div><div></div><div></div>
+        <div></div><div></div><div></div><div>
+        </div><div></div>
+    </div>
 }
 
 export default FilePreview;

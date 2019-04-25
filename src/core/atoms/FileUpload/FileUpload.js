@@ -7,6 +7,8 @@ import FilePreview from './FilePreview';
 import './FileUpload.css';
 
 const id = `check${Math.floor(100000 + Math.random() * 900000)}`;
+const STATE_UPLOADING = 'uploading';
+const STATE_UPLOADED = 'uploaded';
 
 const styles = {
     inputWrapper: 'input-wrapper',
@@ -42,18 +44,12 @@ function FileUpload({
 }) {
 
     const [fileList, setFileList] = useState([]);
-    const [fileExt, setFileExt] = useState('');
     const [fileNames, setFileNames] = useState('No file chosen');
     const [hoverState, setHoverState] = useState(null);
     let textInput = null;
-    const dragClasses = [
-        styles.fileDrag,
-        hoverState
-    ].join(' ').trim();
 
     useEffect(() => {
         handleFileNames();
-        console.log('use effect called', fileList)
     }, [fileList]);
 
     const handleFileSelect = (e) => {
@@ -64,9 +60,8 @@ function FileUpload({
     };
 
     const handleFileNames = () => {
-        console.log(fileList.length)
         if (fileList.length === 0) {
-            return;
+            setFileNames('No file chosen');
         } else if (fileList.length === 1) {
             setFileNames(fileList[0].name);
         } else {
@@ -92,14 +87,18 @@ function FileUpload({
     };
 
     const uploadFiles = () => {
-        //console.log(fileList)
+        fileList.forEach(file => {
+            uploadFile(file).then(() => {
+                removeFile(file);
+            });
+        });
     };
 
     const removeItem = (index) => {
-        // console.log(index)
-        // let list = fileList;
-        // list.splice(index, 1);
-        setFileList(fileList.splice(index, 1));
+        let list = fileList.filter((item, i) => {
+            return i !== index
+        });
+        setFileList(list);
     };
 
     const removeFile = (file) => {
@@ -109,24 +108,32 @@ function FileUpload({
     };
 
     const uploadFile = (file) => {
-        console.log(fileList)
-        // uploadFile(file).then(() => {
-        //     removeFile(file);
-        // });
-    }
+        const index = fileList.indexOf(file);
+        const list = fileList.map((item, i) => {
+            if (i === index) {
+                item.state = STATE_UPLOADING
+            }
+            return item;
+        })
+        setFileList(list);
 
-    const previews = () => {
-        return fileList.map((file, index) => {
-            const removeFileFromPreview = () => {
-                removeItem(index);
-            };
-            return (
-                <FilePreview key={index}
-                    data={file}
-                    onRemove={removeFileFromPreview}
-                    onUpload={uploadFile} />
-            );
-        });
+        const url = 'http://127.0.0.1:3010/upload';
+        const formData = new FormData();
+        formData.append('file', file);
+
+        // fetch(url, {
+        //     method: "post",
+        //     headers: {
+        //         'content-type': 'multipart/form-data'
+        //     },
+        //     body: formData
+        // })
+        //     .then((response) => {
+        //         //do something awesome that makes the world a better place
+        //     });
+        const req = new XMLHttpRequest();
+        req.open("POST", url);
+        req.send(formData);
     };
 
     return (
@@ -135,7 +142,7 @@ function FileUpload({
             <div>
                 <label>
                     <span>{label}</span>
-                    <div className={dragClasses}
+                    <div
                         onDragOver={handleDragOver}
                         onDragLeave={handleDragOver}
                         onDrop={handleFileSelect}>
@@ -165,7 +172,6 @@ function FileUpload({
                 <div className={styles.previews}>
                     {
                         fileList.map((file, index) => {
-                            { console.log('inside render', index) }
                             return (
                                 <FilePreview key={index}
                                     data={file}
