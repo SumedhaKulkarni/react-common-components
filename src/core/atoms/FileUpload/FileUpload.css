@@ -88,15 +88,12 @@
   align-content: center;
   margin: 5px 0;
   background: #CFD8DC;
+  padding: 5px;
 }
 
 .preview-item.disabled {
     background: #F5F5F5;
     pointer-events: none;
-}
-
-.previews {
-
 }
 
 .input {
@@ -125,15 +122,6 @@
   background: #90A4AE;
   animation: load-item .8s ease-in-out infinite;
   
-}
-
-@keyframes load-item {
-  from {
-    transform: rotate(0deg) translateY(20px);
-  }
-  to {
-    transform: rotate(360deg) translateY(20px);
-  }
 }
 
 .button {
@@ -198,4 +186,5 @@
 
 .spacer {
   flex: 1;
+  line-height: 20px;
 }

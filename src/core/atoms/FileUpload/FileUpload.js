@@ -44,7 +44,7 @@ function FileUpload({
     const [fileList, setFileList] = useState([]);
     const [fileExt, setFileExt] = useState('');
     const [fileNames, setFileNames] = useState('No file chosen');
-
+    let textInput = null;
     const dragClasses = [
         styles.fileDrag
         //this.state.hoverState
@@ -52,6 +52,7 @@ function FileUpload({
 
     useEffect(() => {
         handleFileNames();
+        console.log('use effect called', fileList)
     }, [fileList]);
 
     const handleFileSelect = (e) => {
@@ -76,18 +77,20 @@ function FileUpload({
 
     };
 
-    const selectFile = () => {
-
+    const selectFile = (e) => {
+        e.preventDefault();
+        textInput.click(e);
     };
 
     const uploadFiles = () => {
-
+        //console.log(fileList)
     };
 
     const removeItem = (index) => {
-        const fileList = fileList;
-        fileList.splice(index, 1);
-        setFileList(fileList);
+        console.log(index)
+        let list = fileList;
+        list.splice(index, 1);
+        setFileList(list);
     };
 
     const removeFile = (file) => {
@@ -97,17 +100,21 @@ function FileUpload({
     };
 
     const uploadFile = (file) => {
-        uploadFile(file).then(() => {
-            removeFile(file);
-        });
+        console.log(fileList)
+        // uploadFile(file).then(() => {
+        //     removeFile(file);
+        // });
     }
 
     const previews = () => {
         return fileList.map((file, index) => {
+            const removeFileFromPreview = () => {
+                removeItem(index);
+            };
             return (
                 <FilePreview key={index}
                     data={file}
-                    onRemove={removeItem}
+                    onRemove={removeFileFromPreview}
                     onUpload={uploadFile} />
             );
         });
@@ -119,16 +126,15 @@ function FileUpload({
             <div>
                 <label>
                     <span>{label}</span>
-                    <div className={''}
+                    <div className={dragClasses}
                         onDragOver={handleDragOver}
                         onDragLeave={handleDragOver}
                         onDrop={handleFileSelect}>
                         <div className={styles.inputWrapper}>
                             <input type='file'
                                 tabIndex='-1'
-                                //ref={x => this.input = x}
+                                ref={(input) => { textInput = input; }}
                                 className={styles.input}
-                                // name={name}
                                 multiple={multiple}
                                 onChange={handleFileSelect} />
                             <div className={styles.inputCover}>
@@ -147,7 +153,19 @@ function FileUpload({
                     onClick={uploadFiles}>
                     Upload All
             </button>
-                <div className={styles.previews}>{previews()}</div>
+                <div className={styles.previews}>
+                    {
+                        fileList.map((file, index) => {
+                            { console.log('inside render', index) }
+                            return (
+                                <FilePreview key={index}
+                                    data={file}
+                                    onRemove={() => removeItem(index)}
+                                    onUpload={() => uploadFile(file)} />
+                            );
+                        })
+                    }
+                </div>
             </div>
         </div>
     );
