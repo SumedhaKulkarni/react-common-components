@@ -44,10 +44,11 @@ function FileUpload({
     const [fileList, setFileList] = useState([]);
     const [fileExt, setFileExt] = useState('');
     const [fileNames, setFileNames] = useState('No file chosen');
+    const [hoverState, setHoverState] = useState(null);
     let textInput = null;
     const dragClasses = [
-        styles.fileDrag
-        //this.state.hoverState
+        styles.fileDrag,
+        hoverState
     ].join(' ').trim();
 
     useEffect(() => {
@@ -73,8 +74,16 @@ function FileUpload({
         }
     }
 
-    const handleDragOver = () => {
-
+    const handleDragOver = (e) => {
+        if ('preventDefault' in e) {
+            e.stopPropagation();
+            e.preventDefault();
+        }
+        if (e.type === 'dragover') {
+            setHoverState(styles.hover);
+        } else {
+            return;
+        }
     };
 
     const selectFile = (e) => {
@@ -87,10 +96,10 @@ function FileUpload({
     };
 
     const removeItem = (index) => {
-        console.log(index)
-        let list = fileList;
-        list.splice(index, 1);
-        setFileList(list);
+        // console.log(index)
+        // let list = fileList;
+        // list.splice(index, 1);
+        setFileList(fileList.splice(index, 1));
     };
 
     const removeFile = (file) => {
