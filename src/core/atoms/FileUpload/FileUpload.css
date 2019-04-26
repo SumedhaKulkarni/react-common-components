@@ -47,7 +47,7 @@
   will-change: background-position;
 }
 
-.file-drag:hover {
+.hover {
     background-color: #E8F5E9;
     color: #4CAF50;
 }
@@ -77,6 +77,14 @@
   margin: 5px 0;
   background: #CFD8DC;
   padding: 5px;
+}
+
+.uploaded {
+  background: #a8e4aa;
+}
+
+.failed {
+  background: #e4a8a8;
 }
 
 .preview-item.disabled {
@@ -113,30 +121,12 @@
 }
 
 .button {
-  font-size: .8em;
-  margin-right: .5em;
-  padding: .35em .5em;
-  color: currentColor;
-  border: 1px solid;
-  cursor: pointer;
-  background: transparent;
-  color: #607D8B;
-  white-space: nowrap;
-  font-weight: lighter;
-  text-transform: uppercase;
+    margin: 5px;
 }
 
-.button:hover, .button:focus {
-    background: #607D8B;
-    border-color: #607D8B;
-    color: #FFFFFF;
-    outline: 0;
-}
-
-.button:active {
-     background: mix(#607D8B, #FFFFFF, 90%);
-    border-color: mix(#607D8B, #FFFFFF, 90%);
-    color: #FFFFFF;
+.input-wrapper-parent .drop_zone{
+    border: 1px solid #607D8B;
+    margin: 5px;
 }
 
 .input-wrapper {

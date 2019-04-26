@@ -1,66 +1,58 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import clsx from 'clsx';
 import {
     node, string, bool, func, arrayOf, number
 } from 'prop-types';
+import Button from '../Button/Button';
 import './FileUpload.css';
 
 const STATE_UPLOADING = 'uploading';
 const STATE_UPLOADED = 'uploaded';
+const STATE_FAILED = 'failed';
 
 const styles = {
-    inputWrapper: 'input-wrapper',
-    inputCover: 'input-cover',
-    helpText: 'help-text',
-    fileName: 'file-name',
-    fileNameStretch: 'file-name spacer',
-    fileExt: 'file-ext',
-    fileDrag: 'file-drag',
-    input: 'input',
-    loader: 'loader',
-    disabled: 'disabled',
-    loading: 'loading',
-    loaderItem: 'loader-item',
-    spacer: 'spacer',
-    button: 'button',
-    hover: 'hover',
-    imagePreview: 'image-preview',
+    previews: 'previews',
     preview: 'preview',
+    disabled: 'disabled',
     previewItem: 'preview-item',
-    previews: 'previews'
+    fileNameStretch: 'file-name spacer',
+    button: 'button'
 };
 
 function FilePreview({
     data,
     onRemove,
-    onUpload
+    onUpload,
+    uploadSingleButtonText,
+    removeButtonText
 }) {
 
+    const { state } = data;
     const classes = [
         styles.previewItem,
         data.loading ? styles.disabled : ''
     ].join(' ').trim();
-    const { state } = data;
+
     return (
-        <div className={classes}>
+        <div className={clsx(classes, state)}>
             <div className={styles.fileNameStretch}>{data.name}</div>
             {state === STATE_UPLOADING && <Loader />}
-            {state !== STATE_UPLOADING && <button className={styles.button}
+            {state !== STATE_UPLOADING && state !== STATE_UPLOADED && <Button size="small" classname={styles.button}
                 disabled={state === STATE_UPLOADING || state === STATE_UPLOADED}
-                onClick={onRemove}>
-                remove
-            </button>}
-            {state !== STATE_UPLOADING && <button className={styles.button}
+                handleClick={onRemove}>
+                {removeButtonText}
+            </Button>}
+            {state !== STATE_UPLOADING && state !== STATE_UPLOADED && <Button size="small" classname={styles.button}
                 disabled={state === STATE_UPLOADING || state === STATE_UPLOADED}
-                onClick={onUpload}>
-                upload
-            </button>}
+                handleClick={onUpload}>
+                {uploadSingleButtonText}
+            </Button>}
         </div>
     );
 }
 
 const Loader = () => {
-    return <div class="lds-spinner">
+    return <div className="lds-spinner">
         <div></div><div></div><div></div><div>
         </div><div></div><div></div><div></div>
         <div></div><div></div><div></div><div>
