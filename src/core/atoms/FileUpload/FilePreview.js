@@ -71,7 +71,7 @@ FilePreview.propTypes = {
   onUpload: func,
   removeButtonText: string,
   uploadSingleButtonText: string,
-  data: object,
+  data: object, // eslint-disable-line react/forbid-prop-types
 };
 
 FilePreview.defaultProps = {

@@ -100,7 +100,6 @@ function FileUpload({
   };
 
   const handleFileSelect = (e) => {
-    console.log('ok');
     handleDragOver(e);
     const files = e.target.files || e.dataTransfer.files;
     let list = Object.keys(files).map((file, index) => {
@@ -191,7 +190,7 @@ function FileUpload({
     <div>
       <input type="hidden" name="maxSize" value={maxSize} />
       <div className="input-wrapper-parent">
-        <label>
+        <label> {/* eslint-disable-line jsx-a11y/label-has-for */}
           <div
             className={clsx('drop_zone', hoverState)}
             onDragOver={handleDragOver}
