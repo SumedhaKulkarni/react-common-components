@@ -41,6 +41,7 @@ function FileUpload({
   maxSize,
   supportedFileTypes,
   uploadedFilesArray,
+  failedFilesArray,
   onUploadSuccess,
   onUploadFailure,
   onUploadClick,
@@ -81,6 +82,17 @@ function FileUpload({
     });
     setFileList(list);
   }, [uploadedFilesArray]);
+
+  useEffect(() => {
+    const list = fileList.map((file) => {
+      const tempFile = file;
+      if (uploadedFilesArray.indexOf(file) > -1) {
+        tempFile.state = STATE_FAILED;
+      }
+      return tempFile;
+    });
+    setFileList(list);
+  }, [failedFilesArray]);
 
   const handleDragOver = (e) => {
     if ('preventDefault' in e) {
@@ -263,6 +275,7 @@ FileUpload.propTypes = {
   uploadSingleButtonText: string,
   removeButtonText: string,
   uploadedFilesArray: arrayOf(object),
+  failedFilesArray: arrayOf(object),
 };
 
 FileUpload.defaultProps = {
@@ -280,6 +293,7 @@ FileUpload.defaultProps = {
   uploadSingleButtonText: 'Upload',
   removeButtonText: 'Remove',
   uploadedFilesArray: [],
+  failedFilesArray: [],
   buttonClasses: '',
 };
 
