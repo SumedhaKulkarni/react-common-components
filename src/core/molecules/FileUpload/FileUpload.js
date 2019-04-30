@@ -93,7 +93,7 @@ function FileUpload({
       return tempFile;
     });
     setFileList(list);
-  }, [failedFilesArray, fileList, uploadedFilesArray]);
+  }, []);
 
   const handleDragOver = (e) => {
     if ('preventDefault' in e) {
