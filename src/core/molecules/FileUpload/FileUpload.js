@@ -3,9 +3,10 @@ import clsx from 'clsx';
 import {
   string, bool, func, arrayOf, number, object,
 } from 'prop-types';
-import Button from '../Button/Button';
+import Button from '../../atoms/Button/Button';
 import FilePreview from './FilePreview';
 import './FileUpload.css';
+import {generateRandonNumber} from '../../../utils/util';
 
 const STATE_UPLOADING = 'uploading';
 const STATE_UPLOADED = 'uploaded';
@@ -196,8 +197,6 @@ function FileUpload({
     setFileList(list);
   };
 
-  const generateRandonNumber = () => Math.floor(Math.random() * 90000) + 100000;
-
   return (
     <div>
       <input type="hidden" name="maxSize" value={maxSize} />
@@ -244,7 +243,7 @@ function FileUpload({
         {
                     fileList.map((file, index) => (
                       <FilePreview
-                        key={generateRandonNumber()}
+                        key={generateRandonNumber(6)}
                         data={file}
                         uploadSingleButtonText={uploadSingleButtonText}
                         removeButtonText={removeButtonText}

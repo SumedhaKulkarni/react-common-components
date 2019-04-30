@@ -3,7 +3,8 @@ import clsx from 'clsx';
 import {
   string, object, func,
 } from 'prop-types';
-import Button from '../Button/Button';
+import Button from '../../atoms/Button/Button';
+import Loader from './Loader';
 import './FileUpload.css';
 
 const STATE_UPLOADING = 'uploading';
@@ -26,13 +27,9 @@ function FilePreview({
   removeButtonText,
 }) {
   const { state } = data;
-  const classes = [
-    styles.previewItem,
-    data.loading ? styles.disabled : '',
-  ].join(' ').trim();
 
   return (
-    <div className={clsx(classes, state)}>
+    <div className={clsx(styles.previewItem, data.loading ? styles.disabled : '', state)}>
       <div className={styles.fileNameStretch}>{data.name}</div>
       {state === STATE_UPLOADING && <Loader />}
       {state !== STATE_UPLOADING && state !== STATE_UPLOADED && (
@@ -58,13 +55,6 @@ function FilePreview({
     </div>
   );
 }
-
-const Loader = () => (
-  <div className="lds-spinner">
-    <div /><div /><div /><div /><div /><div /><div />
-    <div /><div /><div /><div /><div />
-  </div>
-);
 
 FilePreview.propTypes = {
   onRemove: func,
