@@ -6,6 +6,8 @@ import {
 import Label from '../Label/Label';
 import './Textarea.css';
 
+const id = `textarea${Math.floor(100000 + Math.random() * 900000)}`;
+
 function Textarea({
   classname,
   size,
@@ -47,8 +49,9 @@ function Textarea({
 
   return (
     <div className={clsx(classname, size, 'textarea-component')}>
-      {label && <Label data-testid="textarea-text" classname="textarea-component-label" size={size}>{label}</Label>}
+          {label && <Label htmlFor={id} data-testid="textarea-text" classname="textarea-component-label" size={size}>{label}</Label>}
       <textarea
+      id={id}
         data-testid="textarea"
         disabled={disabled}
         className={clsx(allowResize ? '' : 'no-resize')}
