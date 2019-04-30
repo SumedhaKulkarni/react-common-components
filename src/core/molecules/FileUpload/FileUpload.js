@@ -6,7 +6,7 @@ import {
 import Button from '../../atoms/Button/Button';
 import FilePreview from './FilePreview';
 import './FileUpload.css';
-import {generateRandonNumber} from '../../../utils/util';
+import utils from '../../../utils/util';
 
 const STATE_UPLOADING = 'uploading';
 const STATE_UPLOADED = 'uploaded';
@@ -93,7 +93,7 @@ function FileUpload({
       return tempFile;
     });
     setFileList(list);
-  }, [failedFilesArray]);
+  }, [failedFilesArray, fileList, uploadedFilesArray]);
 
   const handleDragOver = (e) => {
     if ('preventDefault' in e) {
@@ -243,7 +243,7 @@ function FileUpload({
         {
                     fileList.map((file, index) => (
                       <FilePreview
-                        key={generateRandonNumber(6)}
+                        key={utils.generateRandonNumber(6)}
                         data={file}
                         uploadSingleButtonText={uploadSingleButtonText}
                         removeButtonText={removeButtonText}
