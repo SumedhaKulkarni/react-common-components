@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import {
   string, bool, func, number, arrayOf,
@@ -11,6 +11,7 @@ function Textarea({
   size,
   rows,
   label,
+  disabled,
   placeholderText,
   defaultValue,
   allowResize,
@@ -21,6 +22,12 @@ function Textarea({
   handleChange,
 }) {
   const [inputValue, setInputValue] = useState(defaultValue);
+
+  useEffect(() => {
+    if (characterLimit && defaultValue && defaultValue.length > characterLimit) {
+      setInputValue(inputValue.substr(0, characterLimit));
+    }
+  }, []);
 
   const onChange = (e) => {
     let { value } = e.target;
@@ -40,8 +47,10 @@ function Textarea({
 
   return (
     <div className={clsx(classname, size, 'textarea-component')}>
-      {label && <Label classname="textarea-component-label" size={size}>{label}</Label>}
+      {label && <Label data-testid="textarea-text" classname="textarea-component-label" size={size}>{label}</Label>}
       <textarea
+        data-testid="textarea"
+        disabled={disabled}
         className={clsx(allowResize ? '' : 'no-resize')}
         value={inputValue}
         placeholder={placeholderText}
@@ -58,6 +67,7 @@ Textarea.propTypes = {
   classname: string,
   size: string,
   label: string,
+  disabled: bool,
   rows: number,
   placeholderText: string,
   defaultValue: string,
@@ -73,6 +83,7 @@ Textarea.defaultProps = {
   classname: '',
   size: 'small',
   label: '',
+  disabled: false,
   placeholderText: '',
   rows: 5,
   allowResize: true,
