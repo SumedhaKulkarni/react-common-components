@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import Button from './core/atoms/Button/Button';
+import CalendarMonth from './core/molecules/CalendarMonth/CalendarMonth';
 
-ReactDOM.render(<Button>I am button </Button>, document.getElementById('root'));
+ReactDOM.render(<CalendarMonth />, document.getElementById('root'));
 
 
 /* atoms */

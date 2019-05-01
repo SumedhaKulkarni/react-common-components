@@ -1,0 +1,33 @@
+.week-wrapper {
+  width: 100%;
+}
+.week-wrapper {
+  display: flex;
+}
+.week-wrapper > div {
+  flex: 1;
+  border: 1px solid #ececec;
+  padding: 10px 5px;
+  text-transform: uppercase;
+  width: 14.28%;
+  box-sizing: border-box;
+  font-weight: bold;
+}
+.day-wrapper {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+.calendar-header, .navigate-months {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.calendar-header {
+  background: #ececec;
+  opacity: 0.5;
+  padding: 10px;
+}
+.navigate-months button {
+  margin: 0 5px;
+}

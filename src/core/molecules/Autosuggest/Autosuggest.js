@@ -7,7 +7,7 @@ import Textbox from '../../atoms/Textbox/Textbox';
 import './Autosuggest.css';
 import handleClickOutside from '../../common-hooks/useHandleClickOutside';
 
-// this custom hook is used to set the value autosuggest on click of list item
+// this custom hook is used to set the value of autosuggest on click of the list item
 export function useListSelection(value = '') {
   const [selectedItem, setSelectedItem] = useState(value);
 

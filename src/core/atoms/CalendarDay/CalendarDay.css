@@ -1,0 +1,17 @@
+.calenday-day {
+  border: 1px solid #ccc;
+  border-top: none;
+  height: 150px;
+  opacity: 0.5;
+  font-size: 24px;
+  width: 14.28%;
+  padding: 5px;
+  box-sizing: border-box;
+  background: #bbb;
+}
+.current-month {
+  background: #fff;
+}
+.current-day {
+  background: #5d5d5d
+}
