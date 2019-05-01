@@ -1,0 +1,89 @@
+
+.textarea-component {
+    margin: 5px;
+    /* border: 2px solid #a9c6c9;
+    vertical-align: middle;
+    padding: 9px;
+    border-collapse: collapse;
+    margin: 2px;
+    padding: 2px;
+    space: 2px;
+    z-index: 1;
+    font-family: calibri; */
+}
+
+.textarea-component textarea {
+    outline: none;
+    box-sizing: border-box;
+  border: none;
+  border-radius: 3px;
+  font-size: 20px;
+  line-height: 24px;
+  overflow: auto;
+  height: auto;
+  padding: 8px;
+  box-shadow: -1px 1px 10px -3px black;
+}
+
+.no-resize{
+    resize: none;
+}
+
+.textarea-component textarea::-webkit-input-placeholder {
+  color: gainsboro;
+}
+.textarea-component textarea:-ms-input-placeholder {
+  color: gainsboro;
+}
+.textarea-component textarea::-ms-input-placeholder {
+  color: gainsboro;
+}
+.textarea-component textarea::placeholder {
+  color: gainsboro;
+}
+.textarea-component textarea:focus {
+  outline: none;
+}
+
+.textarea-component-label {
+    margin-bottom: 10px;
+}
+
+.textarea-component.extra-small textarea {
+    width: 20%;
+    max-width: 20%;
+    font-size: 10px;
+}
+
+.textarea-component.small textarea {
+    width: 40%;
+    max-width: 40%;
+    font-size: 14px;
+}
+
+.textarea-component.medium textarea {
+    width: 60%;
+    max-width: 60%;
+    font-size: 16px;
+}
+
+.textarea-component.large textarea {
+    width: 80%;
+    max-width: 80%;
+    font-size: 20px;
+}
+
+.textarea-component.extra-large textarea {
+    width: 100%;
+    max-width: 100%;
+    font-size: 24px;
+}
+
+.textarea-component textarea {
+    width: 100%;
+}
+
+.remaining-character {
+    font-size: 16px;
+    color: #9ea2a5;
+}
