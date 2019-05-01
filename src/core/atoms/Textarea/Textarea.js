@@ -5,8 +5,9 @@ import {
 } from 'prop-types';
 import Label from '../Label/Label';
 import './Textarea.css';
+import utils from '../../../utils/util';
 
-const id = `textarea${Math.floor(100000 + Math.random() * 900000)}`;
+const id = `textarea${utils.generateRandonNumber(6)}`;
 
 function Textarea({
   classname,
@@ -17,6 +18,7 @@ function Textarea({
   placeholderText,
   defaultValue,
   allowResize,
+  showRemainingCharacters,
   allowPaste,
   characterLimit,
   regEx,
@@ -47,11 +49,12 @@ function Textarea({
     }
   };
 
+  const limit = parseInt(characterLimit, 10);
   return (
     <div className={clsx(classname, size, 'textarea-component')}>
-          {label && <Label htmlFor={id} data-testid="textarea-text" classname="textarea-component-label" size={size}>{label}</Label>}
+      {label && <Label htmlFor={id} data-testid="textarea-text" classname="textarea-component-label" size={size}>{label}</Label>}
       <textarea
-      id={id}
+        id={id}
         data-testid="textarea"
         disabled={disabled}
         className={clsx(allowResize ? '' : 'no-resize')}
@@ -62,6 +65,8 @@ function Textarea({
         rows={rows}
         maxLength={characterLimit || ''}
       />
+      {showRemainingCharacters && characterLimit
+        && <div data-testid="limit" className="remaining-character">{`${limit - inputValue.length} characters left`}</div>}
     </div>
   );
 }
@@ -76,6 +81,7 @@ Textarea.propTypes = {
   defaultValue: string,
   allowResize: bool,
   allowPaste: bool,
+  showRemainingCharacters: bool,
   characterLimit: string,
   regEx: arrayOf(string),
   replaceString: string,
@@ -91,6 +97,7 @@ Textarea.defaultProps = {
   rows: 5,
   allowResize: true,
   allowPaste: true,
+  showRemainingCharacters: true,
   characterLimit: '',
   defaultValue: '',
   replaceString: '',

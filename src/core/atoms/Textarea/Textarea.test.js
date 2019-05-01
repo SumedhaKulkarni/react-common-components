@@ -47,3 +47,11 @@ it('match regex and validate string when regEx and replaceString props are passe
     fireEvent.change(element, { target: { value: 'replace number 0123 with replaceString' } });
     expect(val).toBe('replace number **** with replaceString');
 });
+
+it('show proper remaining character count', () => {
+    const handleChange = jest.fn();
+    const { getByTestId } = render(<Textarea handleChange={handleChange} showRemainingCharacters={true} characterLimit={50} />);
+    const element = getByTestId('textarea');
+    fireEvent.change(element, { target: { value: '21 characters entered' } });
+    expect(getByTestId('limit').textContent).toBe('29 characters left');
+});

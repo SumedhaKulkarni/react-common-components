@@ -13,11 +13,12 @@ import Textarea from './Textarea';
 
 <Playground>
   <Textarea 
-    placeholderText="Your text goes here..."
+    placeholderText="This textarea doesn't accept any number..."
     label="Textarea component label"
     size={'medium'}
     regEx={['[0-9]', 'g']} 
     replaceString={'*'}
+    characterLimit={'50'}
     handleChange={()=>{}}
 />
 </Playground>
