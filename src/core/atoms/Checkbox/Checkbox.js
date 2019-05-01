@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import clsx from 'clsx';
 import {
-  node, string, bool, func,
+  string, bool, func,
 } from 'prop-types';
 import './Checkbox.css';
 

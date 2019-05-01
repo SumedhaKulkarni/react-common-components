@@ -49,7 +49,6 @@ function Textarea({
     }
   };
 
-  //const limit = parseInt(characterLimit, 10);
   return (
     <div className={clsx(classname, size, 'textarea-component')}>
       {label && <Label htmlFor={id} data-testid="textarea-text" classname="textarea-component-label" size={size}>{label}</Label>}
