@@ -49,7 +49,7 @@ function Textarea({
     }
   };
 
-  const limit = parseInt(characterLimit, 10);
+  //const limit = parseInt(characterLimit, 10);
   return (
     <div className={clsx(classname, size, 'textarea-component')}>
       {label && <Label htmlFor={id} data-testid="textarea-text" classname="textarea-component-label" size={size}>{label}</Label>}
@@ -65,8 +65,8 @@ function Textarea({
         rows={rows}
         maxLength={characterLimit || ''}
       />
-      {showRemainingCharacters && characterLimit
-        && <div data-testid="limit" className="remaining-character">{`${limit - inputValue.length} characters left`}</div>}
+      {showRemainingCharacters && (characterLimit !== 0)
+        && <div data-testid="limit" className="remaining-character">{`${characterLimit - inputValue.length} characters left`}</div>}
     </div>
   );
 }
@@ -82,7 +82,7 @@ Textarea.propTypes = {
   allowResize: bool,
   allowPaste: bool,
   showRemainingCharacters: bool,
-  characterLimit: string,
+  characterLimit: number,
   regEx: arrayOf(string),
   replaceString: string,
   handleChange: func.isRequired,
@@ -98,7 +98,7 @@ Textarea.defaultProps = {
   allowResize: true,
   allowPaste: true,
   showRemainingCharacters: true,
-  characterLimit: '',
+  characterLimit: 0,
   defaultValue: '',
   replaceString: '',
   regEx: [],

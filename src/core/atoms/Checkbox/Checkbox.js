@@ -13,7 +13,6 @@ function Checkbox({
   appearance,
   value,
   displayText,
-  children,
   isChecked,
   disabled,
   handleChange = () => { },
@@ -48,7 +47,6 @@ function Checkbox({
 }
 
 Checkbox.propTypes = {
-  children: node.isRequired,
   disabled: bool,
   value: string,
   displayText: string,
