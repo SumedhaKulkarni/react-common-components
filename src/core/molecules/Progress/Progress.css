@@ -1,0 +1,51 @@
+.progress {
+  margin-bottom: 10px;
+}
+.progress.progress--cicle {
+  display: inline-block;
+  margin-right: 10px;
+}
+.progress.progress--cicle:last-child {
+  margin-right: 0;
+}
+.progress__bar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  position: relative;
+  height: 28px;
+}
+.progress__bar > .progress__bar__line {
+  width: 100%;
+  display: flex;
+  border-radius: 100px;
+  background-color: #d3d3d3;
+  overflow: hidden;
+}
+.progress__bar > .progress__bar__line > .progress__bar__line__fill {
+  border-radius: 100px;
+}
+.progress__bar > .progress__bar__message {
+  font-size: 14px;
+  margin-left: 10px;
+}
+.progress__bar > .progress__bar__message.progress__bar__message--inline {
+  margin-right: 10px;
+  position: absolute;
+}
+.progress__circle {
+  position: relative;
+  display: inline-block;
+}
+.progress__circle > .progress__circle__svg {
+  transform: rotate(-90deg);
+}
+.progress__circle > .progress__circle__svg > .progress-value {
+  stroke-linecap: round;
+}
+.progress__circle > .progress__circle__message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

@@ -22,6 +22,7 @@ ReactDOM.render(<Button>I am button </Button>, document.getElementById('root'));
 /* molecules */
 // import Autosuggest from './core/molecules/Autosuggest/Autosuggest';
 // import RadioGroup from './core/molecules/RadioGroup/RadioGroup';
+// import Progress from './core/molecules/Progress/Progress';
 
 // export {
 //   Accordion,
@@ -37,4 +38,5 @@ ReactDOM.render(<Button>I am button </Button>, document.getElementById('root'));
 //   Textbox,
 //   Autosuggest,
 //   RadioGroup,
+//   Progress,
 // };
