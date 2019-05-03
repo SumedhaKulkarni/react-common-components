@@ -1,0 +1,26 @@
+---
+name: Textarea
+route: /textarea
+menu: Atoms
+---
+
+import { Playground, PropsTable } from 'docz';
+import Textarea from './Textarea';
+
+
+# Textarea
+
+
+<Playground>
+  <Textarea 
+    placeholderText="This textarea doesn't accept any number..."
+    label="Textarea component label"
+    size={'medium'}
+    regEx={['[0-9]', 'g']} 
+    replaceString={'*'}
+    characterLimit={'50'}
+    handleChange={()=>{}}
+/>
+</Playground>
+
+<PropsTable of={Textarea} />

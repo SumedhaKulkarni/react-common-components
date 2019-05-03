@@ -2,7 +2,7 @@
 const utils = {
   generateRandonNumber: (numberOfDigit) => {
     let digit;
-    if (!numberOfDigit || Number.isNaN(numberOfDigit)) {
+    if (!numberOfDigit || Number.isNaN(parseInt(numberOfDigit, 10))) {
       digit = 6;
     } else {
       digit = parseInt(Math.abs(numberOfDigit), 10);
