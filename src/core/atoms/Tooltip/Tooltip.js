@@ -1,58 +1,106 @@
 import React, { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import {
-    string, bool, func, number, oneOf, node
+  string, bool, oneOf, node,
 } from 'prop-types';
 import './Tooltip.scss';
 
 function Tooltip({
-    classname,
-    text,
-    position,
-    type,
-    children
+  classname,
+  text,
+  position,
+  type,
+  displayOnClick,
+  isHtml,
+  children,
 }) {
+  const [displayTooltip, setDisplayTooltip] = useState(false);
 
-    const [displayTooltip, setDisplayTooltip] = useState(false);
+  const hideTooltip = () => {
+    setDisplayTooltip(false);
+  };
 
-    const hideTooltip = () => {
-        setDisplayTooltip(false);
-    };
+  const showTooltip = () => {
+    setDisplayTooltip(true);
+  };
 
-    const showTooltip = () => {
-        setDisplayTooltip(true);
-    };
+  const handleClick = (e) => {
+    const target = e.target.className;
+    if (target === 'tooltip-trigger') {
+      return showTooltip();
+    }
+    return hideTooltip();
+  };
 
-    return (
-        <span className={clsx(classname, 'tooltip')}
-            onMouseLeave={hideTooltip}
-        >
-            {displayTooltip &&
-                <div className={`tooltip-bubble tooltip-${position} tooltip-${type}`}>
-                    <div className={`tooltip-message ${type}`}>{text}</div>
+  useEffect(() => {
+    if (displayOnClick) {
+      document.addEventListener('click', handleClick);
+      return (() => {
+        document.removeEventListener('click', handleClick);
+      });
+    }
+    return undefined;
+  }, []);
+
+  return (
+    <span className={clsx(classname, 'tooltip')}>
+      {displayTooltip
+                && (
+                <div data-testid="tooltip-bubble" className={`tooltip-bubble tooltip-${position} tooltip-${type}`}>
+                  {isHtml
+                    ? <div className={`tooltip-message ${type}`} dangerouslySetInnerHTML={{ __html: text }} />
+                    : <div className={`tooltip-message ${type}`}>{text}</div>}
                 </div>
+                )
             }
-            <span
-                className='tooltip-trigger'
-                onMouseOver={showTooltip}
-            >
-                {children}
-            </span>
-        </span>
-    )
+      {displayOnClick
+        ? (
+          <div
+            data-testid="tooltip-trigger"
+            className="tooltip-trigger"
+            role="presentation"
+            onClick={handleClick}
+            onKeyDown={handleClick}
+          >
+            {children}
+          </div>
+        )
+        : (
+          <div
+            data-testid="tooltip-trigger"
+            className="tooltip-trigger"
+            role="presentation"
+            onMouseOver={showTooltip}
+            onMouseLeave={hideTooltip}
+            onFocus={showTooltip}
+            onBlur={hideTooltip}
+          >
+            {children}
+          </div>
+        )
+            }
+
+    </span>
+  );
 }
 
 Tooltip.propTypes = {
-    text: string,
-    position: oneOf(['left', 'bottom', 'right', 'top']),
-    children: node,
-    type: oneOf(['normal', 'alert', 'warning', 'success', 'dark'])
+  text: string,
+  classname: string,
+  position: oneOf(['left', 'bottom', 'right', 'top']),
+  children: node.isRequired,
+  isHtml: bool,
+  displayOnClick: bool,
+  type: oneOf(['info', 'alert', 'warning', 'success', 'dark']),
 };
 
 Tooltip.defaultProps = {
-    text: '',
-    position: 'right',
-    type: 'warning'
+  text: '',
+  classname: '',
+  position: 'right',
+  type: 'dark',
+  displayOnClick: false,
+  isHtml: false,
 };
 
 export default Tooltip;
