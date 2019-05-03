@@ -1,0 +1,19 @@
+.dropdown-component.extra-small select {
+  font-size: 10px;
+}
+
+.dropdown-component.small select {
+  font-size: 14px;
+}
+
+.dropdown-component.medium select {
+  font-size: 16px;
+}
+
+.dropdown-component.large select {
+  font-size: 20px;
+}
+
+.dropdown-component.extra-large select {
+  font-size: 24px;
+}
