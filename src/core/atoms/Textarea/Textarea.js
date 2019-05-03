@@ -31,7 +31,7 @@ function Textarea({
     if (characterLimit && defaultValue && defaultValue.length > characterLimit) {
       setInputValue(inputValue.substr(0, characterLimit));
     }
-  }, [characterLimit, defaultValue, inputValue]);
+  }, []);
 
   const onChange = (e) => {
     let { value } = e.target;
