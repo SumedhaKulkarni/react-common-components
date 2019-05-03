@@ -14,14 +14,14 @@ import Progress from './Progress';
 
 <Playground>
   <Progress percent={20} />
-  <Progress percent={20} message="Processing..." />
+  <Progress percent={20}>Processing...</Progress>
 </Playground>
 
 ## Message/Percentage inside Progress Bar
 <Playground>
   <Progress percent={0} messageInside />
   <Progress percent={20} messageInside />
-  <Progress percent={100} message="Complete!" messageInside />
+  <Progress percent={100} messageInside>Complete!</Progress>
 </Playground>
 
 ## Progress Bar with custom stroke width
@@ -38,7 +38,7 @@ import Progress from './Progress';
       <div>
         <Progress percent={0} type="circle" />
         <Progress percent={20} type="circle" />
-        <Progress percent={100} strokeSize={10} type="circle" message={textValue} />
+        <Progress percent={100} strokeSize={10} type="circle">{textValue}</Progress>
       </div>
     )
   }}
