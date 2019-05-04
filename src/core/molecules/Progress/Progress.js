@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import clsx from 'clsx';
 import {
   node,
@@ -27,33 +27,52 @@ function Progress({
     radius = (width / 2) - (strokeSize / 2);
     circumference = 2 * Math.PI * radius;
   }
+
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    setCount(percent > 100 ? 100 : percent);
+  }, [percent]);
   return (
     <div data-testid="progress" className={clsx('progress', classname, { 'progress--cicle': type === 'circle' })} {...props}>
       {
         type === 'bar'
           ? (
             <div className="progress__bar">
-              <div
+              <svg
                 className="progress__bar__line"
-                style={{ height: `${strokeSize}px` }}
                 data-testid="progress-bar"
+                style={{
+                  width: '100%',
+                  height: `${strokeSize}px`,
+                }}
               >
-                <div
+                <rect
+                  rx="10"
+                  ry="10"
+                  style={{
+                    width: '100%',
+                    fill: '#d3d3d3',
+                  }}
+                />
+                <rect
                   className="progress__bar__line__fill"
                   data-testid="progress-bar-line-fill"
-                  style={Object.assign({},
-                    percent > 0
-                    && { width: `${percent}%`, backgroundColor: fill, border: `solid 1px ${fill}` })}
+                  rx="10"
+                  ry="10"
+                  style={{
+                    width: `${count}%`,
+                    fill,
+                  }}
                 />
-              </div>
+              </svg>
               <div
-                className={clsx('progress__bar__message', { 'progress__bar__message--inline': messageInside })}
+                className={clsx('progress__bar__message progress__message', { 'progress__bar__message--inline': messageInside })}
                 data-testid="progress-message"
                 style={Object.assign({},
-                  messageInside && (percent < 5) && { left: 0 },
-                  messageInside && (percent >= 5) && { right: `${100 - percent}%` })}
+                  messageInside && (count < 5) && { left: 0 },
+                  messageInside && (count >= 5) && { right: `${100 - count}%` })}
               >
-                {children || `${percent}%`}
+                {children || `${count}%`}
               </div>
             </div>
           )
@@ -84,16 +103,16 @@ function Progress({
                   stroke={fill}
                   strokeWidth={strokeSize}
                   strokeDasharray={circumference}
-                  strokeDashoffset={circumference * (100 - percent) / 100}
+                  strokeDashoffset={circumference * (100 - count) / 100}
                   data-testid="progress-circle-fill"
                 />
               </svg>
               <div
-                className="progress__circle__message"
+                className="progress__circle__message progress__message"
                 style={{ padding: `${strokeSize}px` }}
                 data-testid="progress-message"
               >
-                {children || `${percent}%`}
+                {children || `${count}%`}
               </div>
             </div>
           )

@@ -1,6 +1,9 @@
 .progress {
   margin-bottom: 10px;
 }
+.progress__message {
+  font-size: 14px;
+}
 .progress.progress--cicle {
   display: inline-block;
   margin-right: 10px;
@@ -24,10 +27,11 @@
 }
 .progress__bar > .progress__bar__line > .progress__bar__line__fill {
   border-radius: 100px;
+  transition: width 1s ease-out 0s;
 }
 .progress__bar > .progress__bar__message {
-  font-size: 14px;
   margin-left: 10px;
+  transition: right 1s ease-out 0s;
 }
 .progress__bar > .progress__bar__message.progress__bar__message--inline {
   margin-right: 10px;
@@ -42,6 +46,7 @@
 }
 .progress__circle > .progress__circle__svg > .progress-value {
   stroke-linecap: round;
+  transition: stroke-dashoffset 1s ease-out 0s;
 }
 .progress__circle > .progress__circle__message {
   position: absolute;
