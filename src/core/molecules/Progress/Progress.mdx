@@ -1,0 +1,66 @@
+---
+name: Progress
+route: /progress
+menu: Molecules
+---
+
+import { Playground, PropsTable } from 'docz';
+import Progress from './Progress';
+import Button from '../../atoms/Button/Button';
+import { useState } from 'react';
+
+# Progress
+
+## Progress Bar
+
+<Playground>
+  <Progress percent={40} />
+  <Progress percent={20}>Processing...</Progress>
+</Playground>
+
+## Message/Percentage inside Progress Bar
+<Playground>
+  <Progress percent={0} messageInside />
+  <Progress percent={20} messageInside />
+  <Progress percent={100} messageInside>Complete!</Progress>
+</Playground>
+
+## Progress Bar with custom stroke width
+<Playground>
+  <Progress percent={20} strokeSize={5} />
+  <Progress percent={20} messageInside strokeSize={20} />
+</Playground>
+
+## Progress Circle
+<Playground>
+  {() => {
+    let textValue = <div>Complete!</div>
+    return (
+      <div>
+        <Progress percent={0} type="circle" />
+        <Progress percent={20} type="circle" />
+        <Progress percent={100} strokeSize={10} type="circle">{textValue}</Progress>
+      </div>
+    )
+  }}
+</Playground>
+
+## Animated Progress Circle
+<Playground>
+  {() => {
+    let textValue = <div>Complete!</div>
+    let [percent, setPercent] = useState(50)
+    return (
+      <div>
+        <div>
+          <Progress percent={percent} type="circle" strokeSize={10} width={200} />
+          <Progress percent={percent} messageInside />
+        </div>
+        <Button handleClick={() => setPercent(percent+1)}>Increment</Button>
+        Percent: {percent}
+      </div>
+    )
+  }}
+</Playground>
+
+<PropsTable of={Progress} />
