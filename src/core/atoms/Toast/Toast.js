@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import {
-  string, number, func, bool, node, oneOf, shape,
+  string, number, func, bool, node, oneOf,
 } from 'prop-types';
 import './Toast.scss';
 import { Transition } from 'react-transition-group';
@@ -52,12 +52,10 @@ function Toast({
   children,
   autoClose,
   onCloseToast,
-  pauseOnHover,
   position,
   classname,
   type,
   transition,
-  style,
   ...props
 }) {
   const [isVisible, setVisibility] = useState(showToast);
@@ -114,7 +112,6 @@ function Toast({
     <div
       data-testid="Toastify__toast-container"
       {...props}
-      style={transition}
       className={clsx('Toastify__toast-container', `Toastify__toast-container--${position}`)}
     >
       <Transition
@@ -169,12 +166,10 @@ Toast.propTypes = {
   onCloseToast: func,
   position: oneOf([POSITION.TOP_LEFT, POSITION.TOP_RIGHT, POSITION.TOP_CENTER,
     POSITION.BOTTOM_LEFT, POSITION.BOTTOM_RIGHT, POSITION.BOTTOM_CENTER]),
-  pauseOnHover: bool,
   onClose: func,
   classname: string,
   type: oneOf([TYPE.INFO, TYPE.SUCCESS, TYPE.WARNING, TYPE.ERROR, TYPE.DEFAULT]),
   transition: oneOf([TRANSITION.BOUNCE, TRANSITION.FLIP, TRANSITION.SLIDE, TRANSITION.ZOOM]),
-  style: shape({}),
 };
 Toast.defaultProps = {
   showToast: false,
@@ -184,10 +179,8 @@ Toast.defaultProps = {
   closeButton: false,
   onCloseToast: () => {},
   position: POSITION.BOTTOM_CENTER,
-  pauseOnHover: true,
   type: TYPE.DEFAULT,
   transition: TRANSITION.BOUNCE,
-  style: null,
 };
 
 export default Toast;
