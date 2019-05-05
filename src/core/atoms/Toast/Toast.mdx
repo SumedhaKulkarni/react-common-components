@@ -1,0 +1,32 @@
+---
+name: Toast
+route: /Toast
+menu: Atoms
+---
+import { useState } from 'react';
+import { Playground, PropsTable } from 'docz';
+import Toast from './Toast';
+
+# Toast
+
+<Playground>
+    {() => {
+        const [isOpen, setIsOpen] = useState(false);
+        const openToast = () => {
+            setIsOpen(true);
+        };
+        function onCloseToast() {
+            setIsOpen(false);
+        }
+        return (
+            <div>
+                <button type="button" onClick={openToast}>Open the toast message</button>
+                <Toast showToast={showToast} onCloseToast={onCloseToast}>
+                    <p>Hello there!!!</p>
+                </Toast>
+            </div>
+        )
+    }}
+</Playground>
+
+<PropsTable of={Toast} />

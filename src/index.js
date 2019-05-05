@@ -18,6 +18,8 @@ ReactDOM.render(<Button>I am button </Button>, document.getElementById('root'));
 // import Switch from './core/atoms/Switch/Switch';
 // import Tab from './core/atoms/Tab/Tab';
 // import Textbox from './core/atoms/Textbox/Textbox';
+// import Toast, { POSITION, TRANSITION, TYPE }from './core/atoms/Toast/Toast';
+
 
 /* molecules */
 // import Autosuggest from './core/molecules/Autosuggest/Autosuggest';
@@ -37,4 +39,8 @@ ReactDOM.render(<Button>I am button </Button>, document.getElementById('root'));
 //   Textbox,
 //   Autosuggest,
 //   RadioGroup,
+//   Toast,
+//   POSITION,
+//   TRANSITION,
+//   TYPE
 // };

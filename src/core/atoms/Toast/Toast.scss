@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+@import "scss/variables";
+@import "scss/toast";
+
+// entrance and exit animations
+@import "scss/animations/bounce.scss";
+@import "scss/animations/zoom.scss";
+@import "scss/animations/flip.scss";
+@import "scss/animations/slide.scss";
