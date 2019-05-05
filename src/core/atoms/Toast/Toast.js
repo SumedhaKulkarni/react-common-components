@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import clsx from 'clsx';
 import {
   string, number, func, bool, node, oneOf, shape,
@@ -112,6 +112,7 @@ function Toast({
 
   return (
     <div
+      data-testid="Toastify__toast-container"
       {...props}
       style={transition}
       className={clsx('Toastify__toast-container', `Toastify__toast-container--${position}`)}
@@ -131,6 +132,7 @@ function Toast({
       >
         {() => (
           <div
+            data-testid="Toastify__toast"
             className={clsx('Toastify__toast', `Toastify__toast--${type}`)}
           >
             <div
@@ -140,6 +142,7 @@ function Toast({
             </div>
             {closeButton && (
             <div
+              data-testid="Toastify__action"
               className={clsx('Toastify__action')}
             >
               <button type="button" onClick={onCloseToast}>
@@ -161,7 +164,7 @@ function Toast({
 Toast.propTypes = {
   children: node.isRequired,
   showToast: bool,
-  closeButton: (node || bool),
+  closeButton: bool,
   autoClose: (bool || number),
   onCloseToast: func,
   position: oneOf([POSITION.TOP_LEFT, POSITION.TOP_RIGHT, POSITION.TOP_CENTER,
