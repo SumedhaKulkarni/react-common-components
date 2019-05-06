@@ -38,6 +38,7 @@ function CalendarDay({
       }
       {...props}
       role="button"
+      data-testid="calendar-day"
     >
       {format(day, 'D')}
       <div className="day-items">

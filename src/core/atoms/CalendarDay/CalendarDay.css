@@ -2,12 +2,11 @@
   border: 1px solid #ccc;
   border-top: none;
   height: 170px;
-  opacity: 0.5;
   font-size: 24px;
   width: 14.28%;
   padding: 5px;
   box-sizing: border-box;
-  background: #bbb;
+  background: #eee;
   cursor: not-allowed;
   position: relative;
 }

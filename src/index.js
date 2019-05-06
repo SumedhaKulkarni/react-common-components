@@ -2,8 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import CalendarMonth from './core/molecules/CalendarMonth/CalendarMonth';
+import data from './core/molecules/CalendarMonth/calendarData.json';
 
-ReactDOM.render(<CalendarMonth />, document.getElementById('root'));
+ReactDOM.render(<CalendarMonth monthData={data} />, document.getElementById('root'));
 
 
 /* atoms */

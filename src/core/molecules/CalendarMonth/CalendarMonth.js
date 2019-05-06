@@ -85,14 +85,14 @@ function CalendarMonth({
 
 
   return (
-    <div className={clsx('calendar-month-wrapper', classname)}>
+    <div className={clsx('calendar-month-wrapper', classname)} data-testid="calendar-month">
       <div className="calendar-header">
         <div className="month-year">
           {format(currentMonth, 'MMM YYYY')}
         </div>
         <div className="navigate-months">
-          <Button handleClick={showPreviousMonth} disabled={allowPrev}>Prev</Button>
-          <Button handleClick={showNextMonth} disabled={allowNext}>Next</Button>
+          <Button classname="prev-month" handleClick={showPreviousMonth} disabled={allowPrev}>Prev</Button>
+          <Button classname="next-month" handleClick={showNextMonth} disabled={allowNext}>Next</Button>
         </div>
       </div>
       <div className="week-wrapper">
@@ -122,10 +122,11 @@ CalendarMonth.propTypes = {
   classname: string,
   disableNext: bool,
   disablePrev: bool,
-  monthData: arrayOf(shape({ date: instanceOf(Date), list: arrayOf({}) })).isRequired,
+  monthData: arrayOf(shape({ date: instanceOf(Date), list: [] })).isRequired,
   nextBtnClicked: func,
   prevtBtnClicked: func,
   maxCount: number,
+  onDayObjectSelected: func,
 };
 
 CalendarMonth.defaultProps = {
@@ -136,6 +137,7 @@ CalendarMonth.defaultProps = {
   maxCount: 3,
   nextBtnClicked: () => {},
   prevtBtnClicked: () => {},
+  onDayObjectSelected: () => {},
 };
 
 export default CalendarMonth;
