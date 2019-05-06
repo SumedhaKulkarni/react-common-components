@@ -10,6 +10,7 @@
     "start-js": "react-scripts start",
     "build": "rm -rf dist && NODE_ENV=production babel src/index.js src/core --out-dir dist --copy-files --ignore *.test.js",
     "test": "react-scripts test",
+    "coverage": "react-scripts test --coverage",
     "eject": "react-scripts eject",
     "docz": "docz dev",
     "docz:dev": "docz dev",
