@@ -13,6 +13,8 @@ function Tooltip({
   displayOnClick,
   isHtml,
   children,
+  decorateTooltipTarget,
+  tooltipTargetClassname,
 }) {
   const [displayTooltip, setDisplayTooltip] = useState(false);
 
@@ -68,7 +70,8 @@ function Tooltip({
         : (
           <div
             data-testid="tooltip-trigger"
-            className="tooltip-trigger"
+            className={clsx(decorateTooltipTarget ? 'tooltip-trigger decorate'
+              : 'tooltip-trigger', tooltipTargetClassname)}
             role="presentation"
             onMouseOver={showTooltip}
             onMouseLeave={hideTooltip}
@@ -92,6 +95,8 @@ Tooltip.propTypes = {
   isHtml: bool,
   displayOnClick: bool,
   type: oneOf(['info', 'alert', 'warning', 'success', 'dark']),
+  decorateTooltipTarget: bool,
+  tooltipTargetClassname: string,
 };
 
 Tooltip.defaultProps = {
@@ -101,6 +106,8 @@ Tooltip.defaultProps = {
   type: 'dark',
   displayOnClick: false,
   isHtml: false,
+  decorateTooltipTarget: true,
+  tooltipTargetClassname: '',
 };
 
 export default Tooltip;
