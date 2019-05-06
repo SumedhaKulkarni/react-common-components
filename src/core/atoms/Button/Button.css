@@ -5,6 +5,9 @@
   text-align: center;
   cursor: pointer;
 }
+.button-component button:disabled {
+  cursor: not-allowed;
+}
 
 .button-component.extra-small button{
   font-size: 10px;

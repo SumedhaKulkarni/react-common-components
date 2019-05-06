@@ -1,17 +1,44 @@
 .calenday-day {
   border: 1px solid #ccc;
   border-top: none;
-  height: 150px;
+  height: 170px;
   opacity: 0.5;
   font-size: 24px;
   width: 14.28%;
   padding: 5px;
   box-sizing: border-box;
   background: #bbb;
+  cursor: not-allowed;
+  position: relative;
 }
 .current-month {
   background: #fff;
+  cursor: default;
 }
 .current-day {
-  background: #5d5d5d
+  background-color: aliceblue;
+  color: #000;
+  opacity: 1;
+}
+.day-items {
+  overflow: hidden;
+}
+.day-items .button-component button {
+  display: block;
+  margin: 5px 0;
+  padding: 0 5px;
+  font-size: 12px;
+  background: #ececec;
+  cursor: pointer;
+  border: 0;
+}
+.day-items .additional-listitems button{
+  background: none;
+  position: absolute;
+  bottom: 5px;
+  text-align: center;
+  width: 100%;
+  border: 0;
+  color: #000;
+  font-size: 14px;
 }

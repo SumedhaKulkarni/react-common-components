@@ -1,0 +1,23 @@
+---
+name: CalendarMonth
+route: /calendarmonth
+menu: Molecules
+---
+
+import { Playground, PropsTable } from 'docz';
+import CalendarMonth from './CalendarMonth';
+import data from './calendarData.json'
+
+# CalendarMonth
+
+<Playground>
+  {() => {
+    function onSelection(date, selectedObj) {
+      console.log(date, selectedObj);
+    }
+  return <CalendarMonth monthData={data} onDayObjectSelected={onSelection}/>
+  }}
+  
+</Playground>
+
+<PropsTable of={CalendarMonth} />

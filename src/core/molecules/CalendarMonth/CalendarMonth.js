@@ -6,45 +6,93 @@ import {
   addDays,
   addMonths,
   subMonths,
+  isEqual,
 } from 'date-fns';
 import clsx from 'clsx';
-import { instanceOf, string } from 'prop-types';
+import {
+  instanceOf, string, bool, shape, func, arrayOf, number,
+} from 'prop-types';
 import './CalendarMonth.css';
 import CalendarDay from '../../atoms/CalendarDay/CalendarDay';
 import { getWeekDays, getMonthSkeleton } from '../../../utils/calendarutil';
 import Button from '../../atoms/Button/Button';
 
-function CalendarMonth({ date, classname, ...props }) {
-  const [startDate, setStartDate] = useState(date);
+function CalendarMonth({
+  activeMonth,
+  classname,
+  disableNext,
+  disablePrev,
+  monthData,
+  nextBtnClicked,
+  prevtBtnClicked,
+  maxCount,
+  onDayObjectSelected,
+  ...props
+}) {
+  const [currentMonth, setCurrentMonth] = useState(activeMonth);
+  const [monthInfoObj, setMonthInfoObj] = useState(monthData);
+  const [allowNext, setNext] = useState(disableNext);
+  const [allowPrev, setPrev] = useState(disablePrev);
   useEffect(() => {
-    setStartDate(date);
-  }, [date]);
+    setCurrentMonth(activeMonth);
+  }, [activeMonth]);
+
+  useEffect(() => {
+    setMonthInfoObj(monthData);
+  }, [monthData]);
+
+  useEffect(() => {
+    setNext(disableNext);
+  }, [disableNext]);
+
+  useEffect(() => {
+    setPrev(disablePrev);
+  }, [disablePrev]);
 
   function showPreviousMonth() {
-    setStartDate(prevDate => subMonths(prevDate, 1));
+    setCurrentMonth(prevDate => subMonths(prevDate, 1));
+    prevtBtnClicked();
   }
 
   function showNextMonth() {
-    setStartDate(prevDate => addMonths(prevDate, 1));
+    setCurrentMonth(prevDate => addMonths(prevDate, 1));
+    nextBtnClicked();
   }
 
-  const dayOfWeek = format(startOfMonth(startDate), 'd');
-  const endDateOfMonth = format(endOfMonth(startDate), 'D');
+  const dayOfWeek = format(startOfMonth(currentMonth), 'd');
+  const endDateOfMonth = format(endOfMonth(currentMonth), 'D');
   const totalDaysInView = dayOfWeek + endDateOfMonth > 35 ? 42 : 35;
   const prevMonthDays = -1 * dayOfWeek;
   const currentandnextMonthDays = totalDaysInView - dayOfWeek;
   const monthSkeletion = getMonthSkeleton(prevMonthDays, currentandnextMonthDays);
-  const calendarMonth = monthSkeletion.map(d => addDays(startOfMonth(startDate), d));
+  const calendarMonth = monthSkeletion.map(d => addDays(startOfMonth(currentMonth), d));
+  const monthWithDataMapping = calendarMonth.map((day) => {
+    const dayObject = {
+      day,
+      dayInfo: [],
+    };
+
+    // check if the month object passed from parent has data
+    // corresponding to dates in the month
+    monthInfoObj.map((d) => {
+      if (isEqual(format(d.date, 'MM/DD/YYYY'), format(day, 'MM/DD/YYYY'))) {
+        dayObject.dayInfo.push(d.list);
+      }
+      return d;
+    });
+    return dayObject;
+  });
+
 
   return (
     <div className={clsx('calendar-month-wrapper', classname)}>
       <div className="calendar-header">
         <div className="month-year">
-          {format(startDate, 'MMM YYYY')}
+          {format(currentMonth, 'MMM YYYY')}
         </div>
         <div className="navigate-months">
-          <Button handleClick={showPreviousMonth}>Prev</Button>
-          <Button handleClick={showNextMonth}>Next</Button>
+          <Button handleClick={showPreviousMonth} disabled={allowPrev}>Prev</Button>
+          <Button handleClick={showNextMonth} disabled={allowNext}>Next</Button>
         </div>
       </div>
       <div className="week-wrapper">
@@ -55,20 +103,39 @@ function CalendarMonth({ date, classname, ...props }) {
         ))}
       </div>
       <div className="day-wrapper">
-        {calendarMonth.map(d => <CalendarDay key={format(d, 'DDD')} activeMonth={startDate} day={d} {...props} />)}
+        {monthWithDataMapping.map(d => (
+          <CalendarDay
+            key={format(d.day, 'DDD')}
+            activeMonth={currentMonth}
+            dayObject={d}
+            onSelected={onDayObjectSelected}
+            {...props}
+          />
+        ))}
       </div>
     </div>
   );
 }
 
 CalendarMonth.propTypes = {
-  date: instanceOf(Date),
+  activeMonth: instanceOf(Date),
   classname: string,
+  disableNext: bool,
+  disablePrev: bool,
+  monthData: arrayOf(shape({ date: instanceOf(Date), list: arrayOf({}) })).isRequired,
+  nextBtnClicked: func,
+  prevtBtnClicked: func,
+  maxCount: number,
 };
 
 CalendarMonth.defaultProps = {
-  date: new Date(),
+  activeMonth: new Date(),
   classname: '',
+  disableNext: false,
+  disablePrev: false,
+  maxCount: 3,
+  nextBtnClicked: () => {},
+  prevtBtnClicked: () => {},
 };
 
 export default CalendarMonth;
